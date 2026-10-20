@@ -28,7 +28,12 @@ class NormalizationTests(unittest.TestCase):
             rngs.append(torch.get_rng_state())
             counts.append(sum(p.numel() for p in model.parameters()))
             if normalization=="batchnorm":
-                self.assertEqual(model_fingerprint(model),"ff9df5909da63e26cdef8c2f124b9abc2eb6d224ab299f86e61c8d1289bbac6b")
+                # Compare explicit/default BN in this runtime. RNG initialization
+                # need not have the same byte hash across OS/PyTorch builds.
+                torch.manual_seed(0)
+                default_model=build_model("cnn",embedding_dim=128)
+                self.assertEqual(model_fingerprint(model),model_fingerprint(default_model))
+                self.assertTrue(any(isinstance(m,nn.BatchNorm2d) for m in model.modules()))
             else:
                 self.assertFalse(any(isinstance(m,nn.BatchNorm2d) for m in model.modules()))
         self.assertEqual(len(set(hashes)),1)
