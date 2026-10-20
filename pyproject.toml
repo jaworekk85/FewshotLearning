@@ -1,0 +1,23 @@
+[project]
+name = "fewshot-metric"
+version = "0.1.0"
+description = "Low-label semi-supervised learning experiments on CIFAR-10 and Fashion-MNIST."
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.2",
+  "torchvision>=0.17",
+  "numpy>=1.26",
+  "pandas>=2.0",
+  "scipy>=1.11",
+  "matplotlib>=3.8",
+  "tqdm>=4.66"
+]
+
+[project.optional-dependencies]
+analysis = [
+  "scikit-learn>=1.5,<2",
+  "PyMuPDF>=1.24,<2"
+]
+
+[tool.setuptools.packages.find]
+include = ["fewshot_metric*"]

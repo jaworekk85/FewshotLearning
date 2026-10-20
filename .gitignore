@@ -1,0 +1,33 @@
+# Local environments, datasets and generated training artifacts stay off GitHub.
+.venv*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.mplconfig/
+.coverage
+htmlcov/
+build/
+dist/
+/data/
+/outputs/
+/local-archives/
+*.pt
+*.pth
+*.npz
+*.log
+*.lock
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+.DS_Store
+Thumbs.db
+
+# Original unpublished manuscript is kept locally; share it separately if needed.
+/access_v4.pdf

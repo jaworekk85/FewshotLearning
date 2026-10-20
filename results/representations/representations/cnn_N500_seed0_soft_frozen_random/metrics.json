@@ -1,0 +1,28 @@
+{
+  "run": "cnn_N500_seed0_soft_frozen_random",
+  "signature": {
+    "checkpoint_sha256": "a940673465ffd0a2815285da0849f496c819b4d0c18c062590acb3855f407d63",
+    "splits_sha256": "dfa3097d93fcaf2f853fcdcf8f8638996f488073762964699623b2dee90a4902",
+    "tsne": true,
+    "audit_version": 1
+  },
+  "evaluation_split": "validation",
+  "normalization": "batchnorm",
+  "labeled_reference_size": 500,
+  "validation_size": 1000,
+  "encoder_features": "l2_normalized_embedding",
+  "probe_training_labels": 500,
+  "knn_1_val_accuracy": 0.5870000123977661,
+  "knn_5_val_accuracy": 0.5789999961853027,
+  "knn_15_val_accuracy": 0.5830000042915344,
+  "val_neighbor_purity_10": 0.46470001339912415,
+  "within_over_total_scatter": 0.5634729981159474,
+  "effective_rank": 7.311234951019287,
+  "normalized_feature_variance": 0.007618045900017023,
+  "linear_probe_val_accuracy": 0.594,
+  "linear_probe_iterations": 16,
+  "original_head_val_accuracy": 0.601,
+  "val_silhouette_cosine": 0.02883591316640377,
+  "val_random_triplet_active_fraction": 0.346,
+  "val_random_triplet_mean_loss": 0.10653003026247027
+}

@@ -1,0 +1,95 @@
+{
+  "manual_start_only": true,
+  "base_config": "configs/cifar10_pilot_ssl.json",
+  "seed": 0,
+  "wait_for": "outputs/pilot_mined_triplets/results.json",
+  "wait_error_log": "outputs/pilot_mined_triplets/queue_20261019_181518.stderr.log",
+  "wait_timeout_hours": 48,
+  "preceding_summary": true,
+  "expected_preceding_runs": 6,
+  "output_dir": "outputs/pilot_teacher_contrastive",
+  "representation_output": "outputs/representations",
+  "analysis_python": ".venv-analysis/Scripts/python.exe",
+  "diagnose_previous_runs": [
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft"
+  ],
+  "custom_report_script": "scripts/summarize_teacher_contrastive.py",
+  "custom_report_plan": "configs/cifar10_pilot_teacher_contrastive.json",
+  "custom_report_output": "outputs/pilot_teacher_contrastive_analysis",
+  "experiments": [
+    {
+      "name": "cnn_N50_seed0_soft_reference",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383
+      },
+      "reuse_run": "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft"
+    },
+    {
+      "name": "cnn_N50_seed0_temperature1",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "pseudo_temperature": 1.0
+      }
+    },
+    {
+      "name": "cnn_N50_seed0_teacher_temperature05",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "pseudo_temperature": 0.5,
+        "ema_teacher": true,
+        "ema_teacher_decay": 0.99,
+        "ema_teacher_warmup_epochs": 3
+      }
+    },
+    {
+      "name": "cnn_N50_seed0_teacher_temperature1",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "pseudo_temperature": 1.0,
+        "ema_teacher": true,
+        "ema_teacher_decay": 0.99,
+        "ema_teacher_warmup_epochs": 3
+      }
+    },
+    {
+      "name": "cnn_N50_seed0_contrastive_labeled_instance",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "contrastive_weight": 0.05,
+        "contrastive_temperature": 0.2,
+        "contrastive_warmup_epochs": 3,
+        "contrastive_pseudo_threshold": 0.95,
+        "contrastive_pseudo_pairs": false
+      }
+    },
+    {
+      "name": "cnn_N50_seed0_contrastive_with_pseudo_pairs",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "contrastive_weight": 0.05,
+        "contrastive_temperature": 0.2,
+        "contrastive_warmup_epochs": 3,
+        "contrastive_pseudo_threshold": 0.95,
+        "contrastive_pseudo_pairs": true
+      }
+    }
+  ]
+}

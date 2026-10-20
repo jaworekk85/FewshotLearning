@@ -1,0 +1,520 @@
+[
+  {
+    "run": "cnn_N50_seed0_ce_2v",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v",
+    "test_accuracy": 0.4925
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_40epochs",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v_40epochs",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v_40epochs",
+    "test_accuracy": 0.4934
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v_pseudo",
+    "test_accuracy": 0.5825
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_guided_triplet",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo_guided_triplet",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v_pseudo_guided_triplet",
+    "test_accuracy": 0.5888
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_random_triplet",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo_random_triplet",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v_pseudo_random_triplet",
+    "test_accuracy": 0.581
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_triplet_l",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_l",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v_triplet_l",
+    "test_accuracy": 0.4902
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_triplet_lu",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_lu",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v_triplet_lu",
+    "test_accuracy": 0.5063
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_triplet_u",
+    "dataset": "cifar10",
+    "source": "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_u",
+    "metadata": "results/runs/pilot/cnn_N50_seed0_ce_2v_triplet_u",
+    "test_accuracy": 0.5008
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_entropy",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_next/cnn_N30to500_seed0_active_entropy",
+    "metadata": "results/runs/pilot_next/cnn_N30to500_seed0_active_entropy",
+    "test_accuracy": 0.5491
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_entropy_diverse",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_next/cnn_N30to500_seed0_active_entropy_diverse",
+    "metadata": "results/runs/pilot_next/cnn_N30to500_seed0_active_entropy_diverse",
+    "test_accuracy": 0.5432
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_random",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_next/cnn_N30to500_seed0_active_random",
+    "metadata": "results/runs/pilot_next/cnn_N30to500_seed0_active_random",
+    "test_accuracy": 0.5608
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_semihard_triplet",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_semihard_triplet",
+    "metadata": "results/runs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_semihard_triplet",
+    "test_accuracy": 0.5896
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_soft",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft",
+    "metadata": "results/runs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft",
+    "test_accuracy": 0.6012
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_soft_weight",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft_weight",
+    "metadata": "results/runs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft_weight",
+    "test_accuracy": 0.6006
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_triplet_l_semihard",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_next/cnn_N50_seed0_ce_2v_triplet_l_semihard",
+    "metadata": "results/runs/pilot_next/cnn_N50_seed0_ce_2v_triplet_l_semihard",
+    "test_accuracy": 0.5078
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_u_control",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_reconstruction/cnn_N50_seed0_ce_2v_u_control",
+    "metadata": "results/runs/pilot_reconstruction/cnn_N50_seed0_ce_2v_u_control",
+    "test_accuracy": 0.4805
+  },
+  {
+    "run": "cnn_N50_seed0_reconstruction_dae",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dae",
+    "metadata": "results/runs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dae",
+    "test_accuracy": 0.4842
+  },
+  {
+    "run": "cnn_N50_seed0_reconstruction_dae_pseudo",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dae_pseudo",
+    "metadata": "results/runs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dae_pseudo",
+    "test_accuracy": 0.5814
+  },
+  {
+    "run": "cnn_N50_seed0_reconstruction_dvae",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dvae",
+    "metadata": "results/runs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dvae",
+    "test_accuracy": 0.4866
+  },
+  {
+    "run": "cnn_N50_seed0_reconstruction_dvae_pseudo",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dvae_pseudo",
+    "metadata": "results/runs/pilot_reconstruction/cnn_N50_seed0_reconstruction_dvae_pseudo",
+    "test_accuracy": 0.5808
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_norm_none",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_normalization/cnn_N50_seed0_ce_2v_norm_none",
+    "metadata": "results/runs/pilot_normalization/cnn_N50_seed0_ce_2v_norm_none",
+    "test_accuracy": 0.4393
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_norm_none",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_normalization/cnn_N50_seed0_ce_2v_pseudo_norm_none",
+    "metadata": "results/runs/pilot_normalization/cnn_N50_seed0_ce_2v_pseudo_norm_none",
+    "test_accuracy": 0.5463
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_badge",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_active_prepared/cnn_N30to500_seed0_active_badge",
+    "metadata": "results/runs/pilot_active_prepared/cnn_N30to500_seed0_active_badge",
+    "test_accuracy": 0.5621
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_entropy_density",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_active_prepared/cnn_N30to500_seed0_active_entropy_density",
+    "metadata": "results/runs/pilot_active_prepared/cnn_N30to500_seed0_active_entropy_density",
+    "test_accuracy": 0.5465
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_neighbor_disagreement_density",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_active_prepared/cnn_N30to500_seed0_active_neighbor_disagreement_density",
+    "metadata": "results/runs/pilot_active_prepared/cnn_N30to500_seed0_active_neighbor_disagreement_density",
+    "test_accuracy": 0.5591
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_neighbor_disagreement_density_mix",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_active_prepared/cnn_N30to500_seed0_active_neighbor_disagreement_density_mix",
+    "metadata": "results/runs/pilot_active_prepared/cnn_N30to500_seed0_active_neighbor_disagreement_density_mix",
+    "test_accuracy": 0.5548
+  },
+  {
+    "run": "cnn_N30to500_seed0_active_view_disagreement",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_active_prepared/cnn_N30to500_seed0_active_view_disagreement",
+    "metadata": "results/runs/pilot_active_prepared/cnn_N30to500_seed0_active_view_disagreement",
+    "test_accuracy": 0.564
+  },
+  {
+    "run": "cnn_N30to500_seed0_soft_active_badge",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_badge",
+    "metadata": "results/runs/pilot_validation_study/cnn_N30to500_seed0_soft_active_badge",
+    "test_accuracy": 0.5822
+  },
+  {
+    "run": "cnn_N30to500_seed0_soft_active_random",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_random",
+    "metadata": "results/runs/pilot_validation_study/cnn_N30to500_seed0_soft_active_random",
+    "test_accuracy": 0.5912
+  },
+  {
+    "run": "cnn_N30to500_seed0_soft_mixed_triplet_active_badge",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_mixed_triplet_active_badge",
+    "metadata": "results/runs/pilot_validation_study/cnn_N30to500_seed0_soft_mixed_triplet_active_badge",
+    "test_accuracy": 0.5836
+  },
+  {
+    "run": "cnn_N30to500_seed0_soft_mixed_triplet_active_random",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_mixed_triplet_active_random",
+    "metadata": "results/runs/pilot_validation_study/cnn_N30to500_seed0_soft_mixed_triplet_active_random",
+    "test_accuracy": 0.5794
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_soft_40epochs",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_40epochs",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_40epochs",
+    "test_accuracy": 0.6314
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_soft_80epochs",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_80epochs",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_80epochs",
+    "test_accuracy": 0.6534
+  },
+  {
+    "run": "cnn_N50_seed0_ce_2v_pseudo_soft_mixed_triplet",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_mixed_triplet",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_mixed_triplet",
+    "test_accuracy": 0.6057
+  },
+  {
+    "run": "cnn_N50_seed1_ce_2v",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed1_ce_2v",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed1_ce_2v",
+    "test_accuracy": 0.4852
+  },
+  {
+    "run": "cnn_N50_seed1_ce_2v_pseudo",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed1_ce_2v_pseudo",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed1_ce_2v_pseudo",
+    "test_accuracy": 0.5727
+  },
+  {
+    "run": "cnn_N50_seed1_ce_2v_pseudo_soft",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed1_ce_2v_pseudo_soft",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed1_ce_2v_pseudo_soft",
+    "test_accuracy": 0.5943
+  },
+  {
+    "run": "cnn_N50_seed2_ce_2v",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed2_ce_2v",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed2_ce_2v",
+    "test_accuracy": 0.4876
+  },
+  {
+    "run": "cnn_N50_seed2_ce_2v_pseudo",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed2_ce_2v_pseudo",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed2_ce_2v_pseudo",
+    "test_accuracy": 0.5666
+  },
+  {
+    "run": "cnn_N50_seed2_ce_2v_pseudo_soft",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_validation_study/cnn_N50_seed2_ce_2v_pseudo_soft",
+    "metadata": "results/runs/pilot_validation_study/cnn_N50_seed2_ce_2v_pseudo_soft",
+    "test_accuracy": 0.5826
+  },
+  {
+    "run": "cnn_N500_seed0_soft_frozen_badge",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_active_subset_control/cnn_N500_seed0_soft_frozen_badge",
+    "metadata": "results/runs/pilot_active_subset_control/cnn_N500_seed0_soft_frozen_badge",
+    "test_accuracy": 0.5907
+  },
+  {
+    "run": "cnn_N500_seed0_soft_frozen_random",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_active_subset_control/cnn_N500_seed0_soft_frozen_random",
+    "metadata": "results/runs/pilot_active_subset_control/cnn_N500_seed0_soft_frozen_random",
+    "test_accuracy": 0.5894
+  },
+  {
+    "run": "cnn_N30to500_seed0_soft_neighbor_control_active_confident_neighbor",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_neighbor_reliability/cnn_N30to500_seed0_soft_neighbor_control_active_confident_neighbor",
+    "metadata": "results/runs/pilot_neighbor_reliability/cnn_N30to500_seed0_soft_neighbor_control_active_confident_neighbor",
+    "test_accuracy": 0.5786
+  },
+  {
+    "run": "cnn_N30to500_seed0_soft_neighbor_weight_active_confident_neighbor",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_neighbor_reliability/cnn_N30to500_seed0_soft_neighbor_weight_active_confident_neighbor",
+    "metadata": "results/runs/pilot_neighbor_reliability/cnn_N30to500_seed0_soft_neighbor_weight_active_confident_neighbor",
+    "test_accuracy": 0.5844
+  },
+  {
+    "run": "cnn_N30to500_seed0_soft_neighbor_weight_active_random",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_neighbor_reliability/cnn_N30to500_seed0_soft_neighbor_weight_active_random",
+    "metadata": "results/runs/pilot_neighbor_reliability/cnn_N30to500_seed0_soft_neighbor_weight_active_random",
+    "test_accuracy": 0.5905
+  },
+  {
+    "run": "cnn_N50_seed0_soft_neighbor_weight",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_neighbor_reliability/cnn_N50_seed0_soft_neighbor_weight",
+    "metadata": "results/runs/pilot_neighbor_reliability/cnn_N50_seed0_soft_neighbor_weight",
+    "test_accuracy": 0.5987
+  },
+  {
+    "run": "cnn_N50_seed0_mined_lul_embedding",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_mined_triplets/cnn_N50_seed0_mined_lul_embedding",
+    "metadata": "results/runs/pilot_mined_triplets/cnn_N50_seed0_mined_lul_embedding",
+    "test_accuracy": 0.6079
+  },
+  {
+    "run": "cnn_N50_seed0_mined_mixed_embedding",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_mined_triplets/cnn_N50_seed0_mined_mixed_embedding",
+    "metadata": "results/runs/pilot_mined_triplets/cnn_N50_seed0_mined_mixed_embedding",
+    "test_accuracy": 0.6096
+  },
+  {
+    "run": "cnn_N50_seed0_mined_mixed_embedding_masked",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_mined_triplets/cnn_N50_seed0_mined_mixed_embedding_masked",
+    "metadata": "results/runs/pilot_mined_triplets/cnn_N50_seed0_mined_mixed_embedding_masked",
+    "test_accuracy": 0.6077
+  },
+  {
+    "run": "cnn_N50_seed0_mined_mixed_pixels",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_mined_triplets/cnn_N50_seed0_mined_mixed_pixels",
+    "metadata": "results/runs/pilot_mined_triplets/cnn_N50_seed0_mined_mixed_pixels",
+    "test_accuracy": 0.6062
+  },
+  {
+    "run": "cnn_N50_seed0_contrastive_labeled_instance",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_teacher_contrastive/cnn_N50_seed0_contrastive_labeled_instance",
+    "metadata": "results/runs/pilot_teacher_contrastive/cnn_N50_seed0_contrastive_labeled_instance",
+    "test_accuracy": 0.6041
+  },
+  {
+    "run": "cnn_N50_seed0_contrastive_with_pseudo_pairs",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_teacher_contrastive/cnn_N50_seed0_contrastive_with_pseudo_pairs",
+    "metadata": "results/runs/pilot_teacher_contrastive/cnn_N50_seed0_contrastive_with_pseudo_pairs",
+    "test_accuracy": 0.6055
+  },
+  {
+    "run": "cnn_N50_seed0_teacher_temperature05",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_teacher_contrastive/cnn_N50_seed0_teacher_temperature05",
+    "metadata": "results/runs/pilot_teacher_contrastive/cnn_N50_seed0_teacher_temperature05",
+    "test_accuracy": 0.5919
+  },
+  {
+    "run": "cnn_N50_seed0_teacher_temperature1",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_teacher_contrastive/cnn_N50_seed0_teacher_temperature1",
+    "metadata": "results/runs/pilot_teacher_contrastive/cnn_N50_seed0_teacher_temperature1",
+    "test_accuracy": 0.5963
+  },
+  {
+    "run": "cnn_N50_seed0_temperature1",
+    "dataset": "cifar10",
+    "source": "outputs/pilot_teacher_contrastive/cnn_N50_seed0_temperature1",
+    "metadata": "results/runs/pilot_teacher_contrastive/cnn_N50_seed0_temperature1",
+    "test_accuracy": 0.6007
+  },
+  {
+    "run": "cnn_pilot_N10_seed0",
+    "dataset": "cifar10",
+    "source": "outputs/supervised/cnn_pilot_N10_seed0",
+    "metadata": "results/runs/supervised/cnn_pilot_N10_seed0",
+    "test_accuracy": 0.2977
+  },
+  {
+    "run": "cnn_pilot_N50_seed0",
+    "dataset": "cifar10",
+    "source": "outputs/supervised/cnn_pilot_N50_seed0",
+    "metadata": "results/runs/supervised/cnn_pilot_N50_seed0",
+    "test_accuracy": 0.4962
+  },
+  {
+    "run": "cnn_pilot_full_seed0",
+    "dataset": "cifar10",
+    "source": "outputs/supervised/cnn_pilot_full_seed0",
+    "metadata": "results/runs/supervised/cnn_pilot_full_seed0",
+    "test_accuracy": 0.7975
+  },
+  {
+    "run": "fashion_mnist_N50_seed0_ce",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N50_seed0_ce",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N50_seed0_ce",
+    "test_accuracy": 0.8194
+  },
+  {
+    "run": "fashion_mnist_N50_seed0_hard",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N50_seed0_hard",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N50_seed0_hard",
+    "test_accuracy": 0.8298
+  },
+  {
+    "run": "fashion_mnist_N50_seed0_soft",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N50_seed0_soft",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N50_seed0_soft",
+    "test_accuracy": 0.8322
+  },
+  {
+    "run": "fashion_mnist_N50_seed0_soft_triplet",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N50_seed0_soft_triplet",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N50_seed0_soft_triplet",
+    "test_accuracy": 0.8342
+  },
+  {
+    "run": "fashion_mnist_N50_seed0_soft_contrastive",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N50_seed0_soft_contrastive",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N50_seed0_soft_contrastive",
+    "test_accuracy": 0.8333
+  },
+  {
+    "run": "fashion_mnist_N10_seed0_ce",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N10_seed0_ce",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N10_seed0_ce",
+    "test_accuracy": 0.7133
+  },
+  {
+    "run": "fashion_mnist_N10_seed0_hard",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N10_seed0_hard",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N10_seed0_hard",
+    "test_accuracy": 0.7641
+  },
+  {
+    "run": "fashion_mnist_N10_seed0_soft",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N10_seed0_soft",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N10_seed0_soft",
+    "test_accuracy": 0.762
+  },
+  {
+    "run": "fashion_mnist_N10_seed0_soft_triplet",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N10_seed0_soft_triplet",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N10_seed0_soft_triplet",
+    "test_accuracy": 0.7624
+  },
+  {
+    "run": "fashion_mnist_N10_seed0_soft_contrastive",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N10_seed0_soft_contrastive",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N10_seed0_soft_contrastive",
+    "test_accuracy": 0.7663
+  },
+  {
+    "run": "fashion_mnist_N30_seed0_ce",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N30_seed0_ce",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N30_seed0_ce",
+    "test_accuracy": 0.7999
+  },
+  {
+    "run": "fashion_mnist_N30_seed0_hard",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N30_seed0_hard",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N30_seed0_hard",
+    "test_accuracy": 0.8137
+  },
+  {
+    "run": "fashion_mnist_N30_seed0_soft",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N30_seed0_soft",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N30_seed0_soft",
+    "test_accuracy": 0.8194
+  },
+  {
+    "run": "fashion_mnist_N30_seed0_soft_triplet",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N30_seed0_soft_triplet",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N30_seed0_soft_triplet",
+    "test_accuracy": 0.8238
+  },
+  {
+    "run": "fashion_mnist_N30_seed0_soft_contrastive",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_N30_seed0_soft_contrastive",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_N30_seed0_soft_contrastive",
+    "test_accuracy": 0.8218
+  },
+  {
+    "run": "fashion_mnist_all_seed0_ce",
+    "dataset": "fashion_mnist",
+    "source": "outputs/fashion_mnist_ssl/fashion_mnist_all_seed0_ce",
+    "metadata": "results/runs/fashion_mnist_ssl/fashion_mnist_all_seed0_ce",
+    "test_accuracy": 0.8987
+  }
+]

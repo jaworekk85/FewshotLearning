@@ -1,0 +1,19 @@
+{
+  "runs": [
+    "outputs/pilot/cnn_N50_seed0_ce_2v",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo",
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft_weight",
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft",
+    "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_mixed_triplet",
+    "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_40epochs",
+    "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_80epochs",
+    "outputs/pilot_validation_study/cnn_N50_seed1_ce_2v_pseudo",
+    "outputs/pilot_validation_study/cnn_N50_seed1_ce_2v_pseudo_soft",
+    "outputs/pilot_validation_study/cnn_N50_seed2_ce_2v_pseudo",
+    "outputs/pilot_validation_study/cnn_N50_seed2_ce_2v_pseudo_soft",
+    "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_random",
+    "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_badge",
+    "outputs/pilot_active_subset_control/cnn_N500_seed0_soft_frozen_random",
+    "outputs/pilot_active_subset_control/cnn_N500_seed0_soft_frozen_badge"
+  ]
+}

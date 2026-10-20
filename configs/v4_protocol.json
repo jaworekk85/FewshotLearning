@@ -1,0 +1,217 @@
+{
+  "description": "Protocol reconstructed from access_v4.pdf. Ambiguous implementation choices are kept explicit here.",
+  "component_space": {
+    "datasets": {
+      "cifar10": "32x32 RGB natural images",
+      "fashion_mnist": "28x28 grayscale clothing images, replicated to RGB and resized to 32x32",
+      "svhn": "street-view digits, resized/kept as 32x32 RGB; horizontal flip disabled",
+      "stl10": "96x96 RGB images resized to 32x32"
+    },
+    "architectures": {
+      "cnn": "compact convolutional encoder with a 128-dimensional embedding",
+      "resnet": "small residual encoder with a 128-dimensional embedding"
+    },
+    "objectives": {
+      "ce": "cross-entropy through the linear classification head",
+      "triplet": "joint cross-entropy and triplet margin loss",
+      "supcon_joint": "joint cross-entropy and supervised contrastive loss"
+    },
+    "unlabeled_objectives": {
+      "none": "label-only protocol; unused training images are discarded",
+      "pseudo_ce": "teacher prediction on one unlabeled view becomes a hard pseudo-label above a confidence threshold",
+      "consistency": "teacher probability distribution on one unlabeled view is matched by other views",
+      "simclr": "two or more views of the same unlabeled image are positives in an instance-contrastive loss",
+      "pseudo_triplet": "one unlabeled view is the anchor, another view of the same image is the positive, and a confident batch item with a different pseudo-label is the negative"
+    },
+    "unlabeled_negative_strategies": {
+      "random": "negative is a random different item from the unlabeled batch",
+      "pseudo_label_hard": "negative is the nearest confident batch item with a different pseudo-label",
+      "pseudo_label_or_random": "use pseudo-label hard negative when available, otherwise fall back to random"
+    },
+    "augmentations": {
+      "none": "resize/RGB conversion/tensor normalization only",
+      "weak": "reflected random crop and horizontal flip except on SVHN",
+      "strong": "weak augmentation plus brightness/contrast jitter and additive noise"
+    },
+    "method_fields": [
+      "objective",
+      "updates",
+      "views",
+      "augmentation",
+      "normalize_embedding",
+      "unlabeled_objective",
+      "unlabeled_augmentation",
+      "unlabeled_views",
+      "unlabeled_weight",
+      "unlabeled_limit",
+      "pseudo_label_threshold",
+      "unlabeled_triplet_margin",
+      "unlabeled_negative_strategy"
+    ],
+    "example_compositions": {
+      "triplet_plus_pseudo_labels": {
+        "base_method": "triplet_l2_500",
+        "overrides": {
+          "unlabeled_objective": "pseudo_ce",
+          "unlabeled_augmentation": "strong",
+          "unlabeled_views": 2,
+          "unlabeled_weight": 0.5,
+          "pseudo_label_threshold": 0.95
+        }
+      },
+      "ce_plus_unlabeled_simclr": {
+        "base_method": "ce_aug_4v_l2_500",
+        "overrides": {
+          "unlabeled_objective": "simclr",
+          "unlabeled_augmentation": "strong",
+          "unlabeled_views": 2,
+          "unlabeled_weight": 0.2
+        }
+      },
+      "triplet_plus_unlabeled_pseudo_triplet": {
+        "base_method": "triplet_l2_500",
+        "overrides": {
+          "unlabeled_objective": "pseudo_triplet",
+          "unlabeled_augmentation": "strong",
+          "unlabeled_views": 2,
+          "unlabeled_weight": 0.5,
+          "pseudo_label_threshold": 0.8,
+          "unlabeled_triplet_margin": 0.2,
+          "unlabeled_negative_strategy": "pseudo_label_or_random"
+        }
+      },
+      "triplet_plus_unlabeled_random_triplet": {
+        "base_method": "triplet_l2_500",
+        "overrides": {
+          "unlabeled_objective": "pseudo_triplet",
+          "unlabeled_augmentation": "strong",
+          "unlabeled_views": 2,
+          "unlabeled_weight": 0.5,
+          "unlabeled_triplet_margin": 0.2,
+          "unlabeled_negative_strategy": "random"
+        }
+      }
+    }
+  },
+  "datasets": ["cifar10", "fashion_mnist", "svhn", "stl10"],
+  "architectures": ["cnn", "resnet"],
+  "budgets_per_class": [1, 2, 5, 10, 20, 50, 100, 200],
+  "num_classes": 10,
+  "embedding_dim": 128,
+  "validation_per_class": 100,
+  "primary_seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "v4_seeds": [0, 1, 2, 3, 4],
+  "optimizer": {
+    "name": "adam",
+    "learning_rate": 0.001,
+    "batch_size": 60,
+    "weight_decay": 0.0
+  },
+  "loss_defaults": {
+    "ce_weight": 1.0,
+    "metric_weight": 1.0,
+    "triplet_margin": 0.2,
+    "supcon_temperature": 0.07
+  },
+  "methods": {
+    "ce_500": {
+      "paper_label": "CE (500)",
+      "objective": "ce",
+      "updates": 500,
+      "views": 1,
+      "augmentation": "none",
+      "normalize_embedding": false,
+      "grid": "primary"
+    },
+    "ce_aug_500": {
+      "paper_label": "CE+Aug (500)",
+      "objective": "ce",
+      "updates": 500,
+      "views": 1,
+      "augmentation": "weak",
+      "normalize_embedding": false,
+      "grid": "primary"
+    },
+    "ce_aug_4v_500": {
+      "paper_label": "CE+Aug-4V (500)",
+      "objective": "ce",
+      "updates": 500,
+      "views": 4,
+      "augmentation": "weak",
+      "normalize_embedding": false,
+      "grid": "primary"
+    },
+    "ce_aug_4v_l2_500": {
+      "paper_label": "CE+Aug-4V+L2 (500)",
+      "objective": "ce",
+      "updates": 500,
+      "views": 4,
+      "augmentation": "weak",
+      "normalize_embedding": true,
+      "grid": "primary"
+    },
+    "triplet_500": {
+      "paper_label": "Triplet (500)",
+      "objective": "triplet",
+      "updates": 500,
+      "views": 1,
+      "augmentation": "strong",
+      "normalize_embedding": false,
+      "grid": "primary"
+    },
+    "triplet_l2_500": {
+      "paper_label": "Triplet+L2 (500)",
+      "objective": "triplet",
+      "updates": 500,
+      "views": 1,
+      "augmentation": "strong",
+      "normalize_embedding": true,
+      "grid": "primary"
+    },
+    "supcon_joint_500": {
+      "paper_label": "SupCon-joint (500)",
+      "objective": "supcon_joint",
+      "updates": 500,
+      "views": 2,
+      "augmentation": "strong",
+      "normalize_embedding": true,
+      "grid": "primary"
+    },
+    "ce_2000": {
+      "paper_label": "CE (2000)",
+      "objective": "ce",
+      "updates": 2000,
+      "views": 1,
+      "augmentation": "none",
+      "normalize_embedding": false,
+      "grid": "v4"
+    },
+    "ce_aug_2000": {
+      "paper_label": "CE+Aug (2000)",
+      "objective": "ce",
+      "updates": 2000,
+      "views": 1,
+      "augmentation": "weak",
+      "normalize_embedding": false,
+      "grid": "v4"
+    },
+    "ce_aug_4v_1000": {
+      "paper_label": "CE+Aug-4V (1000)",
+      "objective": "ce",
+      "updates": 1000,
+      "views": 4,
+      "augmentation": "weak",
+      "normalize_embedding": false,
+      "grid": "v4"
+    },
+    "ce_aug_4v_l2_1000": {
+      "paper_label": "CE+Aug-4V+L2 (1000)",
+      "objective": "ce",
+      "updates": 1000,
+      "views": 4,
+      "augmentation": "weak",
+      "normalize_embedding": true,
+      "grid": "v4"
+    }
+  }
+}

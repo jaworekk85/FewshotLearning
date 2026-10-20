@@ -1,0 +1,36 @@
+{
+  "base_config": "configs/cifar10_pilot_ssl.json",
+  "seed": 0,
+  "wait_for": "outputs/pilot_next/results.json",
+  "wait_error_log": "outputs/pilot_next/queue.stderr.log",
+  "wait_timeout_hours": 24,
+  "preceding_summary": true,
+  "expected_preceding_runs": 7,
+  "output_dir": "outputs/pilot_reconstruction",
+  "representation_output": "outputs/representations",
+  "analysis_python": ".venv-analysis/Scripts/python.exe",
+  "diagnose_previous_runs": [
+    "outputs/pilot/cnn_N50_seed0_ce_2v",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_40epochs",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_l",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_u",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_lu",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo_random_triplet",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo_guided_triplet",
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_triplet_l_semihard",
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_semihard_triplet",
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft_weight",
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft",
+    "outputs/pilot_next/cnn_N30to500_seed0_active_random",
+    "outputs/pilot_next/cnn_N30to500_seed0_active_entropy",
+    "outputs/pilot_next/cnn_N30to500_seed0_active_entropy_diverse"
+  ],
+  "training_methods": ["ce_2v_u_control"],
+  "reconstruction_variants": [
+    {"variant": "dae"},
+    {"variant": "dae_pseudo"},
+    {"variant": "dvae"},
+    {"variant": "dvae_pseudo"}
+  ]
+}

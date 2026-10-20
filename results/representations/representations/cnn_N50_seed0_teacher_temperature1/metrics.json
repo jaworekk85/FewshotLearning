@@ -1,0 +1,28 @@
+{
+  "run": "cnn_N50_seed0_teacher_temperature1",
+  "signature": {
+    "checkpoint_sha256": "82e15e196e5501250cbe4c90cb637e23b70542e58383f1737daebee9790c209a",
+    "splits_sha256": "cfc6b64ce6694621c22b9bfe76a8629ec3807d821de5ede691119d53a5d2369c",
+    "tsne": true,
+    "audit_version": 1
+  },
+  "evaluation_split": "validation",
+  "normalization": "batchnorm",
+  "labeled_reference_size": 500,
+  "validation_size": 1000,
+  "encoder_features": "l2_normalized_embedding",
+  "probe_training_labels": 500,
+  "knn_1_val_accuracy": 0.6069999933242798,
+  "knn_5_val_accuracy": 0.609000027179718,
+  "knn_15_val_accuracy": 0.6019999980926514,
+  "val_neighbor_purity_10": 0.47350001335144043,
+  "within_over_total_scatter": 0.5313063919397247,
+  "effective_rank": 6.966770172119141,
+  "normalized_feature_variance": 0.0075586638413369656,
+  "linear_probe_val_accuracy": 0.606,
+  "linear_probe_iterations": 19,
+  "original_head_val_accuracy": 0.604,
+  "val_silhouette_cosine": 0.025290006771683693,
+  "val_random_triplet_active_fraction": 0.313,
+  "val_random_triplet_mean_loss": 0.1039398015499115
+}

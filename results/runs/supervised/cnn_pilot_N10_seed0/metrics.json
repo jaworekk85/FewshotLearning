@@ -1,0 +1,40 @@
+{
+  "architecture": "cnn",
+  "embedding_dim": 128,
+  "seed": 0,
+  "budget_per_class": 10,
+  "validation_per_class": 100,
+  "epochs": 20,
+  "batch_size": 128,
+  "learning_rate": 0.03,
+  "momentum": 0.9,
+  "weight_decay": 0.0005,
+  "num_workers": 0,
+  "selection": "last",
+  "mean": [
+    0.4914,
+    0.4822,
+    0.4465
+  ],
+  "std": [
+    0.2023,
+    0.1994,
+    0.201
+  ],
+  "steps_per_epoch": 383,
+  "synthetic_smoke": false,
+  "dataset": "cifar10",
+  "device": "cpu",
+  "labeled_train_size": 100,
+  "validation_size": 1000,
+  "validation_labels_used_for_selection": false,
+  "total_updates": 7660,
+  "torch_version": "2.14.1+cpu",
+  "selected_epoch": 20,
+  "test_accuracy": 0.2977,
+  "test_loss": 4.21588950920105,
+  "test_size": 10000,
+  "processed_training_images": 766000,
+  "elapsed_seconds": 769.6321904999786,
+  "status": "completed"
+}

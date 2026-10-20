@@ -1,0 +1,174 @@
+{
+  "manual_start_only": true,
+  "base_config": "configs/cifar10_pilot_ssl.json",
+  "seed": 0,
+  "wait_for": "outputs/pilot_active_subset_control/results.json",
+  "wait_error_log": "outputs/pilot_active_subset_control/queue_20261018.stderr.log",
+  "wait_timeout_hours": 48,
+  "preceding_summary": true,
+  "expected_preceding_runs": 2,
+  "output_dir": "outputs/pilot_neighbor_reliability",
+  "representation_output": "outputs/representations",
+  "analysis_python": ".venv-analysis/Scripts/python.exe",
+  "diagnose_previous_runs": [
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft"
+  ],
+  "custom_report_script": "scripts/summarize_neighbor_reliability.py",
+  "custom_report_plan": "configs/cifar10_pilot_neighbor_reliability.json",
+  "custom_report_output": "outputs/pilot_neighbor_reliability_analysis",
+  "experiments": [
+    {
+      "name": "cnn_N50_seed0_soft_neighbor_control",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383
+      },
+      "reuse_run": "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft"
+    },
+    {
+      "name": "cnn_N50_seed0_soft_neighbor_weight",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "neighbor_reference": true,
+        "neighbor_warmup_epochs": 3,
+        "neighbor_confidence_threshold": 0.95,
+        "neighbor_k": 15,
+        "neighbor_temperature": 0.2,
+        "neighbor_js_scale": 0.2,
+        "neighbor_weight_floor": 0.25,
+        "neighbor_pseudo_weighting": true
+      }
+    },
+    {
+      "name": "cnn_N30to500_seed0_soft_neighbor_control_active_random",
+      "kind": "active",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "budget_per_class": 30,
+        "active_final_budget": 500,
+        "active_query_size": 40,
+        "active_rounds": [
+          3,
+          6,
+          9,
+          12,
+          15
+        ],
+        "active_candidate_limit": 4096,
+        "active_selection_version": 2,
+        "active_scoring_views": 1,
+        "active_strategy": "random"
+      },
+      "reuse_run": "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_random"
+    },
+    {
+      "name": "cnn_N30to500_seed0_soft_neighbor_control_active_confident_neighbor",
+      "kind": "active",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "budget_per_class": 30,
+        "active_final_budget": 500,
+        "active_query_size": 40,
+        "active_rounds": [
+          3,
+          6,
+          9,
+          12,
+          15
+        ],
+        "active_candidate_limit": 4096,
+        "active_selection_version": 2,
+        "active_scoring_views": 1,
+        "active_selection_settings": {
+          "confident_threshold": 0.95,
+          "confident_query_fraction": 0.5
+        },
+        "active_strategy": "confident_neighbor"
+      }
+    },
+    {
+      "name": "cnn_N30to500_seed0_soft_neighbor_weight_active_random",
+      "kind": "active",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "neighbor_reference": true,
+        "neighbor_warmup_epochs": 3,
+        "neighbor_confidence_threshold": 0.95,
+        "neighbor_k": 15,
+        "neighbor_temperature": 0.2,
+        "neighbor_js_scale": 0.2,
+        "neighbor_weight_floor": 0.25,
+        "budget_per_class": 30,
+        "active_final_budget": 500,
+        "active_query_size": 40,
+        "active_rounds": [
+          3,
+          6,
+          9,
+          12,
+          15
+        ],
+        "active_candidate_limit": 4096,
+        "active_selection_version": 2,
+        "active_scoring_views": 1,
+        "active_selection_settings": {
+          "confident_threshold": 0.95,
+          "confident_query_fraction": 0.5
+        },
+        "active_strategy": "random",
+        "neighbor_pseudo_weighting": true
+      }
+    },
+    {
+      "name": "cnn_N30to500_seed0_soft_neighbor_weight_active_confident_neighbor",
+      "kind": "active",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "neighbor_reference": true,
+        "neighbor_warmup_epochs": 3,
+        "neighbor_confidence_threshold": 0.95,
+        "neighbor_k": 15,
+        "neighbor_temperature": 0.2,
+        "neighbor_js_scale": 0.2,
+        "neighbor_weight_floor": 0.25,
+        "budget_per_class": 30,
+        "active_final_budget": 500,
+        "active_query_size": 40,
+        "active_rounds": [
+          3,
+          6,
+          9,
+          12,
+          15
+        ],
+        "active_candidate_limit": 4096,
+        "active_selection_version": 2,
+        "active_scoring_views": 1,
+        "active_selection_settings": {
+          "confident_threshold": 0.95,
+          "confident_query_fraction": 0.5
+        },
+        "active_strategy": "confident_neighbor",
+        "neighbor_pseudo_weighting": true
+      }
+    }
+  ],
+  "reuse_note": "Two completed baselines reused; four new training runs. Extra neighbor inference costs reported separately."
+}

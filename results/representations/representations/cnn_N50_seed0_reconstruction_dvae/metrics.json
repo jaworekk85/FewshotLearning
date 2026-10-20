@@ -1,0 +1,28 @@
+{
+  "run": "cnn_N50_seed0_reconstruction_dvae",
+  "signature": {
+    "checkpoint_sha256": "569c428184dfe7e75c839ed85df6fda05b30c569ed630fc8353933b853977613",
+    "splits_sha256": "cfc6b64ce6694621c22b9bfe76a8629ec3807d821de5ede691119d53a5d2369c",
+    "tsne": true,
+    "audit_version": 1
+  },
+  "evaluation_split": "validation",
+  "normalization": "batchnorm",
+  "labeled_reference_size": 500,
+  "validation_size": 1000,
+  "encoder_features": "l2_normalized_embedding",
+  "probe_training_labels": 500,
+  "knn_1_val_accuracy": 0.49799999594688416,
+  "knn_5_val_accuracy": 0.4909999966621399,
+  "knn_15_val_accuracy": 0.5049999952316284,
+  "val_neighbor_purity_10": 0.374099999666214,
+  "within_over_total_scatter": 0.649423532391763,
+  "effective_rank": 7.778323650360107,
+  "normalized_feature_variance": 0.007420817855745554,
+  "linear_probe_val_accuracy": 0.502,
+  "linear_probe_iterations": 25,
+  "original_head_val_accuracy": 0.496,
+  "val_silhouette_cosine": -0.018414443358778954,
+  "val_random_triplet_active_fraction": 0.391,
+  "val_random_triplet_mean_loss": 0.12693340129852296
+}

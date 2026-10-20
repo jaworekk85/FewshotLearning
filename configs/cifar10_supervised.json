@@ -1,0 +1,16 @@
+{
+  "architecture": "cifar_resnet18",
+  "embedding_dim": 512,
+  "seed": 0,
+  "budget_per_class": "all",
+  "validation_per_class": 100,
+  "epochs": 200,
+  "batch_size": 128,
+  "learning_rate": 0.1,
+  "momentum": 0.9,
+  "weight_decay": 0.0005,
+  "num_workers": 0,
+  "selection": "last",
+  "mean": [0.4914, 0.4822, 0.4465],
+  "std": [0.2023, 0.1994, 0.2010]
+}

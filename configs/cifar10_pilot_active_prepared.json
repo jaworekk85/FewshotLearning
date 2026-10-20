@@ -1,0 +1,41 @@
+{
+  "manual_start_only": true,
+  "base_config": "configs/cifar10_pilot_ssl.json",
+  "seed": 0,
+  "wait_for": "outputs/pilot_normalization/results.json",
+  "wait_error_log": "outputs/pilot_normalization/queue_no_groupnorm.stderr.log",
+  "wait_timeout_hours": 48,
+  "preceding_summary": true,
+  "expected_preceding_runs": 2,
+  "output_dir": "outputs/pilot_active_prepared",
+  "representation_output": "outputs/representations",
+  "analysis_python": ".venv-analysis/Scripts/python.exe",
+  "diagnose_previous_runs": [
+    "outputs/pilot_next/cnn_N30to500_seed0_active_random",
+    "outputs/pilot_next/cnn_N30to500_seed0_active_entropy",
+    "outputs/pilot_next/cnn_N30to500_seed0_active_entropy_diverse"
+  ],
+  "active_learning": {
+    "budget_per_class": 30,
+    "active_final_budget": 500,
+    "active_query_size": 40,
+    "active_rounds": [3, 6, 9, 12, 15],
+    "active_candidate_limit": 4096,
+    "active_selection_version": 2,
+    "active_scoring_views": 4,
+    "active_selection_settings": {
+      "density_neighbors": 10,
+      "density_temperature": 0.1,
+      "label_neighbors": 15,
+      "label_temperature": 0.2,
+      "random_fraction": 0.5
+    },
+    "strategies": [
+      "badge",
+      "entropy_density",
+      "neighbor_disagreement_density",
+      "view_disagreement",
+      "neighbor_disagreement_density_mix"
+    ]
+  }
+}

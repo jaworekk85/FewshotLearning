@@ -1,0 +1,34 @@
+{
+  "base_config": "configs/cifar10_pilot_ssl.json",
+  "seed": 0,
+  "wait_for": "outputs/pilot/cnn_N50_seed0_ce_2v_40epochs/metrics.json",
+  "wait_error_log": "outputs/pilot/ce40_seed0_20261016.stderr.log",
+  "wait_timeout_hours": 8,
+  "output_dir": "outputs/pilot_next",
+  "representation_output": "outputs/representations",
+  "analysis_python": ".venv-analysis/Scripts/python.exe",
+  "diagnose_previous_runs": [
+    "outputs/pilot/cnn_N50_seed0_ce_2v",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_40epochs",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_l",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_u",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_triplet_lu",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo_random_triplet",
+    "outputs/pilot/cnn_N50_seed0_ce_2v_pseudo_guided_triplet"
+  ],
+  "training_methods": [
+    "ce_2v_triplet_l_semihard",
+    "ce_2v_pseudo_semihard_triplet",
+    "ce_2v_pseudo_soft_weight",
+    "ce_2v_pseudo_soft"
+  ],
+  "active_learning": {
+    "budget_per_class": 30,
+    "active_final_budget": 500,
+    "active_query_size": 40,
+    "active_rounds": [3, 6, 9, 12, 15],
+    "active_candidate_limit": 4096,
+    "strategies": ["random", "entropy", "entropy_diverse"]
+  }
+}

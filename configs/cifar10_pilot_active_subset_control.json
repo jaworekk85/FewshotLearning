@@ -1,0 +1,50 @@
+{
+  "manual_start_only": true,
+  "base_config": "configs/cifar10_pilot_ssl.json",
+  "seed": 0,
+  "wait_for": "outputs/pilot_validation_study/results.json",
+  "wait_error_log": "outputs/pilot_validation_study/queue_mixed_20261017.stderr.log",
+  "wait_timeout_hours": 48,
+  "preceding_summary": true,
+  "expected_preceding_runs": 16,
+  "output_dir": "outputs/pilot_active_subset_control",
+  "representation_output": "outputs/representations",
+  "analysis_python": ".venv-analysis/Scripts/python.exe",
+  "diagnose_previous_runs": [
+    "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_random",
+    "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_badge"
+  ],
+  "custom_report_script": "scripts/summarize_active_subset_control.py",
+  "custom_report_plan": "configs/cifar10_pilot_active_subset_control.json",
+  "custom_report_output": "outputs/pilot_active_subset_control_analysis",
+  "experiments": [
+    {
+      "name": "cnn_N500_seed0_soft_frozen_random",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "fixed_split_manifest": "configs/active_subset_control/random_final500.json",
+        "fixed_split_manifest_sha256": "08cb0a0bd9986f19a0f0e3288ec3fc55eb22506b5e7e6123bca8e1276548b4fc",
+        "fixed_subset_strategy": "random",
+        "fixed_subset_source_run": "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_random",
+        "fixed_split_source_initial_model_sha256": "ff9df5909da63e26cdef8c2f124b9abc2eb6d224ab299f86e61c8d1289bbac6b"
+      }
+    },
+    {
+      "name": "cnn_N500_seed0_soft_frozen_badge",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "fixed_split_manifest": "configs/active_subset_control/badge_final500.json",
+        "fixed_split_manifest_sha256": "96bc8523f393bededd52dc553ea10fc13070a2767787b2aa6147d05bbcc544c0",
+        "fixed_subset_strategy": "badge",
+        "fixed_subset_source_run": "outputs/pilot_validation_study/cnn_N30to500_seed0_soft_active_badge",
+        "fixed_split_source_initial_model_sha256": "ff9df5909da63e26cdef8c2f124b9abc2eb6d224ab299f86e61c8d1289bbac6b"
+      }
+    }
+  ]
+}

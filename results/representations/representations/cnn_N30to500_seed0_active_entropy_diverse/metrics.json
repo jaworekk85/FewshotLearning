@@ -1,0 +1,28 @@
+{
+  "run": "cnn_N30to500_seed0_active_entropy_diverse",
+  "signature": {
+    "checkpoint_sha256": "083c1fc4db9b03cc81cea7aed9651636879067a1ae0aaa3fb3c3529e9c48f944",
+    "splits_sha256": "a738b80c63a73334c6b3aefd84b477213856901dca77b791c16f8195e6181fcc",
+    "tsne": true,
+    "audit_version": 1
+  },
+  "evaluation_split": "validation",
+  "normalization": "batchnorm",
+  "labeled_reference_size": 500,
+  "validation_size": 1000,
+  "encoder_features": "l2_normalized_embedding",
+  "probe_training_labels": 500,
+  "knn_1_val_accuracy": 0.5329999923706055,
+  "knn_5_val_accuracy": 0.531000018119812,
+  "knn_15_val_accuracy": 0.5360000133514404,
+  "val_neighbor_purity_10": 0.4099000096321106,
+  "within_over_total_scatter": 0.5896141517777382,
+  "effective_rank": 7.447625160217285,
+  "normalized_feature_variance": 0.007590337656438351,
+  "linear_probe_val_accuracy": 0.548,
+  "linear_probe_iterations": 25,
+  "original_head_val_accuracy": 0.528,
+  "val_silhouette_cosine": -0.005285895429551601,
+  "val_random_triplet_active_fraction": 0.363,
+  "val_random_triplet_mean_loss": 0.11787716428041457
+}

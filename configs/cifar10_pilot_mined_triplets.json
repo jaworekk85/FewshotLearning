@@ -1,0 +1,90 @@
+{
+  "manual_start_only": true,
+  "base_config": "configs/cifar10_pilot_ssl.json",
+  "seed": 0,
+  "wait_for": "outputs/pilot_neighbor_reliability/results.json",
+  "wait_error_log": "outputs/pilot_neighbor_reliability/queue_shortened_20261019_095322.stderr.log",
+  "wait_timeout_hours": 48,
+  "preceding_summary": true,
+  "expected_preceding_runs": 6,
+  "output_dir": "outputs/pilot_mined_triplets",
+  "representation_output": "outputs/representations",
+  "analysis_python": ".venv-analysis/Scripts/python.exe",
+  "diagnose_previous_runs": [
+    "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft",
+    "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_mixed_triplet"
+  ],
+  "custom_report_script": "scripts/summarize_mined_triplets.py",
+  "custom_report_plan": "configs/cifar10_pilot_mined_triplets.json",
+  "custom_report_output": "outputs/pilot_mined_triplets_analysis",
+  "experiments": [
+    {
+      "name": "cnn_N50_seed0_soft_reference",
+      "method": "ce_2v_pseudo_soft",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383
+      },
+      "reuse_run": "outputs/pilot_next/cnn_N50_seed0_ce_2v_pseudo_soft"
+    },
+    {
+      "name": "cnn_N50_seed0_old_mixed_reference",
+      "method": "ce_2v_pseudo_soft_mixed_triplet",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383
+      },
+      "reuse_run": "outputs/pilot_validation_study/cnn_N50_seed0_ce_2v_pseudo_soft_mixed_triplet"
+    },
+    {
+      "name": "cnn_N50_seed0_mined_lul_embedding",
+      "method": "ce_2v_pseudo_soft_mined_triplet",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "metric_triplet_design": "lul",
+        "metric_triplet_distance": "embedding",
+        "metric_triplet_mask_same_pseudo": false
+      }
+    },
+    {
+      "name": "cnn_N50_seed0_mined_mixed_embedding",
+      "method": "ce_2v_pseudo_soft_mined_triplet",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "metric_triplet_design": "mixed",
+        "metric_triplet_distance": "embedding",
+        "metric_triplet_mask_same_pseudo": false
+      }
+    },
+    {
+      "name": "cnn_N50_seed0_mined_mixed_pixels",
+      "method": "ce_2v_pseudo_soft_mined_triplet",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "metric_triplet_design": "mixed",
+        "metric_triplet_distance": "pixels",
+        "metric_triplet_mask_same_pseudo": false
+      }
+    },
+    {
+      "name": "cnn_N50_seed0_mined_mixed_embedding_masked",
+      "method": "ce_2v_pseudo_soft_mined_triplet",
+      "seed": 0,
+      "overrides": {
+        "epochs": 20,
+        "steps_per_epoch": 383,
+        "metric_triplet_design": "mixed",
+        "metric_triplet_distance": "embedding",
+        "metric_triplet_mask_same_pseudo": true
+      }
+    }
+  ]
+}

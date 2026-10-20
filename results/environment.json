@@ -1,0 +1,15 @@
+{
+  "description": "Environment at handoff export; per-run versions are in run configs/metrics",
+  "python": "3.10.11",
+  "system": "Windows",
+  "packages": {
+    "torch": "2.14.1",
+    "torchvision": "0.29.1",
+    "numpy": "2.2.6",
+    "pandas": null,
+    "scipy": "1.15.3",
+    "scikit-learn": "1.7.2",
+    "matplotlib": "3.10.9",
+    "PyMuPDF": "1.27.2.3"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "run": "cnn_N50_seed0_temperature1",
+  "signature": {
+    "checkpoint_sha256": "9285c893a019fecd4a3a6fec68434ebf59783478a1c9766f35186e70cb685cc5",
+    "splits_sha256": "cfc6b64ce6694621c22b9bfe76a8629ec3807d821de5ede691119d53a5d2369c",
+    "tsne": true,
+    "audit_version": 1
+  },
+  "evaluation_split": "validation",
+  "normalization": "batchnorm",
+  "labeled_reference_size": 500,
+  "validation_size": 1000,
+  "encoder_features": "l2_normalized_embedding",
+  "probe_training_labels": 500,
+  "knn_1_val_accuracy": 0.6159999966621399,
+  "knn_5_val_accuracy": 0.6140000224113464,
+  "knn_15_val_accuracy": 0.6060000061988831,
+  "val_neighbor_purity_10": 0.4749999940395355,
+  "within_over_total_scatter": 0.5271684465315459,
+  "effective_rank": 6.923470973968506,
+  "normalized_feature_variance": 0.007536518853157759,
+  "linear_probe_val_accuracy": 0.614,
+  "linear_probe_iterations": 19,
+  "original_head_val_accuracy": 0.616,
+  "val_silhouette_cosine": 0.02222452685236931,
+  "val_random_triplet_active_fraction": 0.304,
+  "val_random_triplet_mean_loss": 0.10403004549741746
+}

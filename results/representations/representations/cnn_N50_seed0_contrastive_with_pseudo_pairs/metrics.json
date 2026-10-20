@@ -1,0 +1,28 @@
+{
+  "run": "cnn_N50_seed0_contrastive_with_pseudo_pairs",
+  "signature": {
+    "checkpoint_sha256": "5036ae29395b2198e7a799eddca91b59ac15f3a6e2aa4debcb9900d56b7105a0",
+    "splits_sha256": "cfc6b64ce6694621c22b9bfe76a8629ec3807d821de5ede691119d53a5d2369c",
+    "tsne": true,
+    "audit_version": 1
+  },
+  "evaluation_split": "validation",
+  "normalization": "batchnorm",
+  "labeled_reference_size": 500,
+  "validation_size": 1000,
+  "encoder_features": "l2_normalized_embedding",
+  "probe_training_labels": 500,
+  "knn_1_val_accuracy": 0.5979999899864197,
+  "knn_5_val_accuracy": 0.6039999723434448,
+  "knn_15_val_accuracy": 0.5979999899864197,
+  "val_neighbor_purity_10": 0.4932999908924103,
+  "within_over_total_scatter": 0.5918387732441152,
+  "effective_rank": 8.823046684265137,
+  "normalized_feature_variance": 0.00774528319016099,
+  "linear_probe_val_accuracy": 0.601,
+  "linear_probe_iterations": 12,
+  "original_head_val_accuracy": 0.604,
+  "val_silhouette_cosine": 0.05599147453904152,
+  "val_random_triplet_active_fraction": 0.344,
+  "val_random_triplet_mean_loss": 0.10328766028881074
+}
