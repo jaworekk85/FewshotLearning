@@ -1,12 +1,13 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Temperatura celów, nauczyciel EMA i mieszane pary kontrastowe
 
-Pięć nowych treningów zleconych przez użytkownika; jeden ukończony soft SSL
-wykorzystujemy ponownie. Osobno wykonano analizę istniejącej CNN z pełnym nadzorem,
+Ukończono pięć treningów; wcześniejszy wynik soft SSL wykorzystano ponownie.
+Konfiguracja: `configs/cifar10_pilot_teacher_contrastive.json`. Osobno wykonano analizę istniejącej CNN z pełnym nadzorem,
 bez nowego treningu ani włączania jej etykiet do eksperymentów z budżetem 500.
 
-## Plan
+## Wykonane porównania
 
 | Wariant | Temperatura celu | Źródło pseudoetykiet | Nowa strata kontrastowa |
 |---|---:|---|---|
@@ -111,8 +112,8 @@ anchorów dotyczy kroków rzeczywistego uczenia kontrastowego.
 ## Reprezentacje na wspólnej podstawie
 
 `scripts/compare_reference_representations.py` porównuje istniejące CE500, soft20,
-soft80, najlepsze nowe trójki i CNN uczoną na 49 000 etykietach. Następnie dopisuje
-ukończone nowe modele, a dla EMA również nauczyciela.
+soft80, najlepsze nowe trójki i CNN uczoną na 49 000 etykietach. Uwzględnia
+modele tej serii, a dla EMA również nauczyciela.
 
 Wszystkie mają te same 1000 obrazów walidacyjnych, w tej samej kolejności,
 i te same 500 prawdziwie oznaczonych obrazów referencyjnych do kNN i linear probe.
@@ -127,27 +128,18 @@ są niezależne; nie porównujemy odległości pomiędzy punktami z różnych pa
 Poza wykresami raportujemy head accuracy, kNN15, probe, lokalną czystość klas,
 silhouette i rozrzut. Nie stroimy wizualizacji pod oczekiwany wygląd klas.
 
-## Start, wznowienie i wyniki
+## Artefakty
 
-```powershell
-python -u scripts/run_next_pilot.py --plan configs/cifar10_pilot_teacher_contrastive.json --start-prepared
-```
-
-Plan jest chroniony przed przypadkowym startem bez `--start-prepared`.
-Ta sama komenda wznawia przerwany run od ostatniej zapisanej epoki, pomijając
-zgodne wyniki ukończone. Nie należy startować drugiej kopii równolegle.
-
-Stan kolejki: `outputs/pilot_teacher_contrastive/queue.json`.
-Wyniki: `outputs/pilot_teacher_contrastive_analysis/comparison.md` i `.json`.
-Po każdym ukończonym modelu aktualizujemy także wspólne porównanie reprezentacji.
+Wersjonowane runy: `results/runs/pilot_teacher_contrastive/`.
+Lokalny raport: `outputs/pilot_teacher_contrastive_analysis/comparison.md` i `.json`.
+Wspólne porównanie reprezentacji: `outputs/representation_reference/comparison.md`.
 
 Samodzielna analiza bez treningu:
 
 ```powershell
-.\.venv-analysis\Scripts\python.exe scripts/compare_reference_representations.py
-.\.venv-analysis\Scripts\python.exe scripts/summarize_teacher_contrastive.py
+python scripts/compare_reference_representations.py
+python scripts/summarize_teacher_contrastive.py
 ```
 
-Szacunek na obecnym CPU: **7–9 godzin** za pięć nowych treningów i analizy.
-To pilot jednego seedu. Nie gwarantujemy poprawy accuracy i nie traktujemy
-wyboru parametrów znanych metod jako samodzielnego wkładu naukowego.
+To pilot jednego seedu. Wybór parametrów znanych metod nie jest samodzielnym
+wkładem naukowym; małe różnice nie dowodzą powtarzalnej przewagi.

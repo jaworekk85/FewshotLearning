@@ -1,4 +1,5 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Szybki pilot na CIFAR-10
 
@@ -6,10 +7,7 @@ Zaczynamy od istniejącego `ConvEncoder` (`architecture=cnn`): trzy konwolucje
 32/64/128 kanałów, pooling, embedding 128D, głowica dziesięcioklasowa.
 Łącznie **111 498 parametrów**. Nie zmieniano architektur odtworzonych z PDF-u.
 
-Cel: tanio sprawdzić działanie treningu i wykrywać efekty dodawania członów
-straty. Pierwszy wynik supervised jest już zmierzony; stabilność rankingu
-wariantów SSL wymaga kolejnych eksperymentów.
-Najciekawsze efekty trzeba później potwierdzić na większym encoderze.
+Cel pilota: sprawdzenie działania treningu i efektów dodawania członów straty.
 
 ## Zakończona kontrola supervised
 
@@ -62,53 +60,15 @@ Konfiguracja pilota ma **20 epok odniesienia / 7660 aktualizacji**, zamiast
 Dochodzi ładowanie, augmentacje, walidacja, zapis checkpointów i końcowy test.
 Rzeczywisty ukończony run z tym narzutem trwał **17 min 16 s**.
 To czas pojedynczego supervised runu; SSL z dodatkowymi widokami kosztuje więcej.
-Nie zmierzono jeszcze czasu GPU.
+Czasu GPU w tej serii nie mierzono.
 
 Benchmarki zapisano w `outputs/benchmarks/`; wykonano je kolejno, bez
 równoległego obciążania CPU innym benchmarkiem.
 
-## Pierwsza kontrola
+## Protokół
 
-```powershell
-python scripts/run_supervised.py --config configs/cifar10_pilot_supervised.json --device cpu --download --run-name cnn_pilot_full_seed0 --stop-after-epoch 2
-```
-
-Po dwóch rzeczywistych epokach sprawdzić czas, train loss i walidację.
-Następnie wznowić zaplanowany trening, zachowując harmonogram:
-
-```powershell
-python scripts/run_supervised.py --config configs/cifar10_pilot_supervised.json --device cpu --run-name cnn_pilot_full_seed0 --resume
-```
-
-Wszystkie ograniczenia dotyczące walidacji i testu opisuje
-`SUPERVISED_BASELINE.md`. Pilot rezerwuje dodatkowe 100 etykiet walidacyjnych
-na klasę. Domyślnie wybiera ostatni checkpoint.
-
-## Najmniejsza seria porównawcza
-
-1. Najpierw ukończyć supervised control na dostępnych pełnych etykietach.
-   Sprawdzić krzywą i czy poprawa trwa jeszcze pod koniec harmonogramu.
-2. Na tym samym CNN porównać N=10 i N=50, początkowo seed=0.
-3. Dla każdego budżetu porównać CE, CE+triplet_L,
-   CE+triplet_U i CE+triplet_L+triplet_U: **8 runów**.
-4. Przy ciekawym wyniku powtórzyć z trzema sparowanymi seedami: 24 runy.
-
-Nowy wspólny protokół dwóch widoków L obsługuje CE, triplet_L, triplet_U,
-ich połączenie i pseudoetykiety: `PILOT_SSL.md`, konfiguracja
-`configs/cifar10_pilot_ssl.json`. Stare CE z jednym widokiem zachowujemy jako
-osobny punkt odniesienia. Nowych wyników SSL jeszcze nie zmierzono.
-
-Podgląd konfiguracji i baseline małego budżetu:
-
-```powershell
-python scripts/run_supervised.py --config configs/cifar10_pilot_supervised.json --budget 50 --print-spec
-python scripts/run_supervised.py --config configs/cifar10_pilot_supervised.json --budget 50 --device cpu --run-name cnn_pilot_N50_seed0
-```
-
-Małe budżety zachowują tę samą liczbę aktualizacji co pełna kontrola,
-powtarzając dozwoloną oznaczoną pulę. Wynik pełnej kontroli nie służy jako
-pretrening do małych budżetów.
-
-Nie odrzucać metody wyłącznie po krótkim pilotażu: słaba reprezentacja może
-wynikać z małej pojemności lub niedokończonego treningu. Porównać też krzywe,
-a w kolejnym etapie k-NN i linear probe, nie tylko wizualizację 2D.
+Konfiguracja: `configs/cifar10_pilot_supervised.json`.
+Pilot rezerwuje dodatkowe 100 etykiet walidacyjnych na klasę i wybiera ostatni
+checkpoint. Małe budżety zachowują liczbę aktualizacji pełnej kontroli,
+powtarzając oznaczoną pulę. Wagi pełnej kontroli nie służą jako pretrening.
+Późniejszy protokół dwóch widoków L opisuje [PILOT_SSL.md](PILOT_SSL.md).

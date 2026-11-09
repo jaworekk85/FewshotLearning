@@ -35,7 +35,7 @@ Nie trzeba ich czytać, aby uruchomić pięć głównych metod.
 przez starszy, konfigurowalny protokół `v4_protocol.json`, `run_experiment.py`
 i `run_grid.py`. Ta ścieżka ma inne długości uczenia i polityki danych niż
 bieżące piloty. Nie należy łączyć jej wyników z pilotami bez sprawdzenia protokołu.
-5760 pozycji manifestu to **plan**, nie wykonane treningi. Historyczny opis:
+5760 pozycji manifestu to **niewykonana historyczna siatka**, nie bieżący plan. Historyczny opis:
 [EXPERIMENT_SPEC.md](archive/EXPERIMENT_SPEC.md).
 
 ## Rozsądny zakres zmian
@@ -50,5 +50,6 @@ Duża część skryptów to prezentacja wyników, a nie kolejne implementacje uc
 Porządkowanie przekazania nie zmienia funkcji strat, augmentacji ani historycznych
 konfiguracji: ich zmiana wymaga nowych eksperymentów.
 
-Archiwum `docs/archive/` zawiera notatki z kolejnych etapów, w tym nieaktualne
-„jeszcze liczy się” i ówczesne ETA. Bieżący stan badań opisują wyniki oraz README.
+[Archiwum protokołów](archive/README.md) opisuje ukończone eksperymenty i starszą
+rekonstrukcję manuskryptu. Nie jest listą przyszłych zadań. Bieżący stan badań
+opisują wyniki oraz README; kolejny eksperyment nie został tu ustalony.

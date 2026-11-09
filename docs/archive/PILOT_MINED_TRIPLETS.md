@@ -1,9 +1,10 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
-# Nowe trójki: źródła etykiet, odległe pozytywy i sprzeczne negatywy
+# Trójki: źródła etykiet, odległe pozytywy i sprzeczne negatywy
 
-Plan `configs/cifar10_pilot_mined_triplets.json` obejmuje **cztery nowe treningi**
-i dwa ponownie wykorzystane wyniki. Użytkownik autoryzował uruchomienie tej serii.
+Ukończono cztery treningi według `configs/cifar10_pilot_mined_triplets.json`;
+dwa wcześniejsze wyniki wykorzystano ponownie.
 Nowość dotyczy dotychczasowych eksperymentów w repo, nie deklaracji nowości naukowej.
 Audyt 46 ukończonych runów jest w `outputs/pilot_mined_triplets_analysis/novelty_audit.json`.
 
@@ -89,19 +90,8 @@ sumy odległości pozytywów i negatywów oraz liczbę wykluczonych par instancy
 Po każdym modelu automatycznie powstaje dotychczasowy audyt reprezentacji:
 kNN, linear probe, lokalna czystość klas, PCA/t-SNE i pozostałe metryki.
 
-## Uruchomienie i monitoring
+## Artefakty
 
-```powershell
-python -u scripts/run_next_pilot.py --plan configs/cifar10_pilot_mined_triplets.json --start-prepared
-```
-
-Ta sama komenda wznawia run przerwany na granicy epoki i pomija zgodne wyniki ukończone.
-Podgląd bez treningu: dopisać `--print-plan` i pominąć `--start-prepared`.
-Nie uruchamiać drugiej kopii podczas działania kolejki.
-
-Stan: `outputs/pilot_mined_triplets/queue.json`.
-Raport: `outputs/pilot_mined_triplets_analysis/comparison.md`.
+Wersjonowane runy: `results/runs/pilot_mined_triplets/`.
+Lokalny raport: `outputs/pilot_mined_triplets_analysis/comparison.md`.
 Odświeżenie raportu bez treningu: `python scripts/summarize_mined_triplets.py`.
-
-Wstępny szacunek: około **6–8 godzin** lokalnego CPU za cztery nowe runy
-wraz z analizami. Potwierdzimy po zmierzeniu pierwszych epok, szczególnie dla RGB.

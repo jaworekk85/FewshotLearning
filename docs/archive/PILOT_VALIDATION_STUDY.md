@@ -1,28 +1,16 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Weryfikacja efektów i połączenie miękkiego SSL, mieszanych trójek i AL
 
-**Seria ukończona 18.10.2026 bez błędów:** 13 nowych treningów i 3 ponownie
-wykorzystane wyniki. Miękkie SSL seed 0: test 60,12% po 20 epokach,
-63,14% po 40 i 65,34% po 80. Następny uruchomiony eksperyment opisuje
-`PILOT_ACTIVE_SUBSET_CONTROL.md`.
+Seria ukończona 18.10.2026: 13 nowych treningów i 3 ponownie wykorzystane wyniki.
+Miękkie SSL seed=0: test 60,12% po 20 epokach, 63,14% po 40 i 65,34% po 80.
+Konfiguracja: `configs/cifar10_pilot_validation_study.json`.
 
-Zlecone 17.10.2026. Plan: `configs/cifar10_pilot_validation_study.json`.
-16 pozycji: **3 istniejące wyniki użyte ponownie, 13 nowych treningów**.
-Uruchomiono **17.10.2026 o 22:51 czasu polskiego**, lokalnie na CPU,
-poprzedni worker **PID 18548**. Logi: `outputs/pilot_validation_study/queue_20261017.stdout.log`
-i `queue_20261017.stderr.log`. Przed startem przeszły wszystkie 62 testy.
-Po doprecyzowaniu przez użytkownika przerwano wariant wyłącznie instancji U
-po pierwszej zapisanej epoce, zachowując checkpoint i oznaczając run jako
-`superseded` (wyłączony z tabeli wyników, bez testu). Plan zmieniono na miks
-L/pseudo/U. Kopie starego planu i stanu są w katalogu kolejki jako
-`plan_before_mixed_triplets.json` i `queue_before_mixed_triplets.json`.
-Poprawioną kolejkę uruchomiono **17.10.2026 o 22:59**, worker **PID 32944**;
-aktualne logi: `queue_mixed_20261017.stdout.log` i `queue_mixed_20261017.stderr.log`
-w katalogu kolejki. Przed wznowieniem przeszły wszystkie **64 testy** oraz
-ponowne testy wznowienia z aktywnym składnikiem pseudo-trójek.
-Bez zmiany zbioru (CIFAR-10), CNN (111 498 parametrów), budżetu treningowych
-etykiet (500) i bazowych augmentacji. Nie jest to pełna siatka hiperparametrów.
+Wariant wyłącznie instancji U został przerwany po pierwszej epoce i zastąpiony
+miksem L/pseudo/U. Przerwany run ma status `superseded`, bez wyniku testu;
+nie należy do tabeli ukończonych treningów.
+Bez zmiany CIFAR-10, CNN (111 498 parametrów), budżetu 500 etykiet i augmentacji.
 
 ## 1. Powtarzalność
 
@@ -67,10 +55,9 @@ uniwersalnego pożytku z trójek. Raport używa kNN5, linear probe, purity10,
 silhouette i scatter w przestrzeni 128D. Probe trenuje wyłącznie na L,
 nie na walidacji. t-SNE jest ilustracją i nie służy do pomiaru separacji.
 
-Każdy nowy ukończony model otrzyma ten sam standardowy audyt. Zestawienie
-statystyczne aktualizuje się po każdym ukończonym runie; tabela geometrii
-w raporcie pokazuje ustalony zestaw początkowych modeli seeda 0, a pełne
-audyty nowych modeli znajdują się we wspólnym katalogu reprezentacji.
+Każdy ukończony model otrzymał standardowy audyt. Tabela geometrii
+w raporcie pokazuje ustalony zestaw początkowych modeli seeda 0; pełne
+audyty znajdują się we wspólnym katalogu reprezentacji.
 
 ## 4. Miękkie pseudoetykiety + mieszane trójki + active learning
 
@@ -144,37 +131,16 @@ losowego negatywu na kotwicę. Nowy wariant dodaje miks trzech składników do
 miękkiego SSL; nie izoluje wpływu każdego z trzech typów osobno. Izolację
 wpływu całej mieszanki daje porównanie z nową kontrolą soft.
 
-## Uruchomienie, artefakty, czas
+## Artefakty
+
+Konfiguracje, metryki, podziały i historie: `results/runs/pilot_validation_study/`.
+Lokalny raport: `outputs/pilot_validation_study_analysis/study.md`.
+Odświeżenie raportu bez treningu:
 
 ```powershell
-python scripts/run_next_pilot.py --plan configs/cifar10_pilot_validation_study.json --print-plan
-python scripts/run_next_pilot.py --plan configs/cifar10_pilot_validation_study.json --start-prepared --device cpu
+python scripts/summarize_validation_study.py
 ```
 
-Kolejka ma blokadę pojedynczego workera, wznawia checkpointy i pomija zgodne
-ukończone wyniki. Przy restarcie najpierw sprawdzić PID z `queue.json`, potem
-użyć tego samego polecenia. Nie modyfikować planu działającego workera.
-Odczyt istniejącego wyniku wymaga zgodności całej konfiguracji; brak wyniku
-oznaczonego do ponownego wykorzystania jest błędem, nie nowym treningiem.
-
-Stan: `outputs/pilot_validation_study/queue.json`. Pełne artefakty jak w
-poprzednich pilotach. Raport analityczny:
-`outputs/pilot_validation_study_analysis/study.md`. Globalne porównanie
-obejmuje także nowe runy i pozostaje w `outputs/pilot_comparison.md/.csv/.json`.
-
-Raport można odświeżyć bez treningu:
-
-```powershell
-.\.venv-analysis\Scripts\python.exe scripts/summarize_validation_study.py
-```
-
-Orientacyjny koszt 13 nowych treningów na obecnym CPU: **około 22–30 godzin**
-z audytami. Bazuje na pomiarach CE około 36 min i SSL/AL około 78–80 min
-na 20 epok. 40+80 epok miękkiego SSL to łącznie około 8 godzin. Nie jest to
-pomiar nowego batch-all; ETA aktualizować według faktycznych czasów epok.
-Nie uruchamiamy chmury ani płatnych zasobów.
-
-Walidacja: osobne 100 etykiet na klasę (1000) w każdym podziale, zawsze
-wyłączone z L i U. Test CIFAR-10 10 000, dopiero po końcu treningu.
-Nie zwiększamy budżetu etykiet przez pseudoetykietowanie. Nie dodajemy teraz
-innych zbiorów, architektur, dwóch mocnych widoków ani dodatkowych metod AL.
+Walidacja: osobne 100 etykiet na klasę (1000), zawsze wyłączone z L i U.
+Oficjalny test CIFAR-10 oceniano po końcu treningu. Pseudoetykiety nie zwiększają
+budżetu anotacji. Seria obejmuje wyłącznie jeden zbiór i jedną architekturę.

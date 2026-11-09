@@ -1,4 +1,5 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Diagnostyka wiarygodności pseudoetykiet
 

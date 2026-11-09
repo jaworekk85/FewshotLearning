@@ -1,15 +1,12 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
-# AE/VAE jako kolejne warianty wspólnego pilota
+# AE/VAE we wspólnym pilocie
 
-Po tym bloku zaplanowano dwa brakujące porównania CE/pseudoetykietowania
-bez normalizacji, opisane w `PILOT_NORMALIZATION.md`.
-
-Protokół poprawiony 16.10.2026: zachowujemy wejścia, augmentacje, seed i liczbę
-aktualizacji dotychczasowej serii. Rezygnujemy z dodatkowego maskowania oraz
-powtarzania CE/pseudoetykietowania na zmienionych wejściach. Poprzednia kolejka
-nie rozpoczęła żadnego treningu AE/VAE; jej oczekujący proces zatrzymano, a plan
-zachowano w `outputs/pilot_reconstruction/superseded_masked_queue.json`.
+Ukończono pięć treningów według `configs/cifar10_pilot_reconstruction.json`.
+Protokół zachował wejścia, augmentacje, seed i liczbę aktualizacji wcześniejszej
+serii. Wariant z dodatkowym maskowaniem oraz osobny 25-epokowy run zostały
+wycofane przed treningiem. Nie należą do wykonanych porównań.
 
 ## Jedno porównanie
 
@@ -30,14 +27,13 @@ Strategie AL porównujemy przede wszystkim z losowym pozyskiwaniem w tych samych
 rundach. Wcześniejsze mniejsze minibatche L oznaczają trochę inną ekspozycję L
 niż przy stałych 500 etykietach — dlatego pokazujemy rzeczywiste liczniki.
 
-## Pięć dodatkowych treningów
+## Pięć wykonanych treningów
 
-Plan: `configs/cifar10_pilot_reconstruction.json`. Kolejka czeka na siedem
-ukończonych runów w `outputs/pilot_next/results.json`.
+Konfiguracja: `configs/cifar10_pilot_reconstruction.json`.
 
-| Nowy wariant | Cel |
+| Wariant | Cel |
 | --- | --- |
-| `ce_2v_u_control` | Jedna brakująca kontrola wpływu U na BatchNorm |
+| `ce_2v_u_control` | Kontrola wpływu U na BatchNorm |
 | `dae` | CE + rekonstrukcja AE |
 | `dae_pseudo` | CE + rekonstrukcja AE + pseudoetykiety |
 | `dvae` | CE + rekonstrukcja VAE + KL |
@@ -95,14 +91,5 @@ osobno; równe epoki/wejścia encodera nie oznaczają równych FLOPs.
 Po każdym runie powstają PCA/t-SNE/kNN/linear probe i rekonstrukcje ośmiu stałych
 obrazów walidacyjnych: cel, istniejący mocny widok i wynik. Bez etykiet U/testu.
 
-```powershell
-python -u scripts/run_next_pilot.py --plan configs/cifar10_pilot_reconstruction.json --device cpu
-```
-
-Stan: `outputs/pilot_reconstruction/queue.json`, wyniki: `results.json`.
-Kolejka wznawia checkpointy i pomija zgodne ukończone runy. Restart komputera
-wymaga ponownego uruchomienia kolejki.
-Nowy blok pięciu treningów: orientacyjnie 7–9 godzin po obecnej serii.
-Poprzedni benchmark kosztu samych modułów (+15% AE, +24% VAE) nadal dotyczy
-tych samych modułów. Mierzył losowe tensory w RAM, bez augmentacji i masek,
-przy trwającym innym treningu — służy do szerokiego ETA.
+Lokalne wyniki: `outputs/pilot_reconstruction/results.json`.
+Wersjonowane konfiguracje, historie i metryki: `results/runs/pilot_reconstruction/`.

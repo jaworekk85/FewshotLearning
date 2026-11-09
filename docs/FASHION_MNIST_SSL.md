@@ -1,6 +1,7 @@
-# Mały pilot SSL: Fashion-MNIST
+# Ukończony pilot SSL: Fashion-MNIST
 
-Uruchamiamy jedną ograniczoną serię zamiast kolejnej dużej siatki. Plan:
+Wykonano 16 treningów; wyniki: [RESULTS.md](RESULTS.md#fashion-mnist).
+Poniżej protokół i instrukcja odtworzenia ukończonej serii. Konfiguracja:
 [configs/fashion_mnist_ssl.json](../configs/fashion_mnist_ssl.json).
 
 ## Zakres
@@ -10,7 +11,7 @@ Uruchamiamy jedną ograniczoną serię zamiast kolejnej dużej siatki. Plan:
   miękkie PL + contrastive z pseudo-parami. Implementacje strat są wspólne z CIFAR-10.
 - Seed0: 15 porównań i **jedno dodatkowe odniesienie z pełnym nadzorem** na 59 000
   etykietach. Razem 16 treningów. To pilot; nie deklarujemy istotności statystycznej.
-- Na razie nie dodajemy active learningu, EMA, AE/VAE ani kolejnych miningów.
+- Seria nie obejmowała active learningu, EMA, AE/VAE ani kolejnych miningów.
 
 ## Dane i architektura
 
@@ -103,6 +104,5 @@ Osobne testy używają wyłącznie tymczasowych fixture’ów, poza wynikami bad
 
 Pobranie zbioru: oficjalny mirror autorów
 <https://github.com/zalandoresearch/fashion-mnist/tree/master/data/fashion>,
-sumy MD5 sprawdzane przez torchvision. Kod obsługuje też MNIST, lecz ten plan
-uruchamia wyłącznie Fashion-MNIST. Rozszerzenie na MNIST lub kolejne seedy
-powinno zachować ten sam protokół i mieć osobny katalog.
+sumy MD5 sprawdzane przez torchvision. Kod obsługuje też MNIST, lecz wykonana seria
+obejmuje wyłącznie Fashion-MNIST.

@@ -1,19 +1,15 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
-# Kolejna seria: reprezentacje, dobór trójek, miękkie pseudoetykiety, active learning
+# Reprezentacje, dobór trójek, miękkie pseudoetykiety i active learning
 
-Po ukończeniu tej serii osobna kolejka uruchomi blok odszumiających AE/VAE
-i kontrole kosztu, opisane w `PILOT_RECONSTRUCTION.md`.
+Ukończona seria CIFAR-10: siedem treningów, seed=0, mały CNN bez pretreningu.
+Konfiguracja: `configs/cifar10_pilot_next.json`.
 
-Zlecona 16.10.2026. Jeden seed (0), obecny mały CNN, bez pretreningu.
-Plan: `configs/cifar10_pilot_next.json`. Kolejka czeka na ukończone
-`outputs/pilot/cnn_N50_seed0_ce_2v_40epochs/metrics.json`, następnie wykonuje
-analizy i treningi sekwencyjnie. Nie konkuruje z CE40 o CPU.
+## Analiza reprezentacji
 
-## Analiza reprezentacji — wspólna dla obecnych i przyszłych modeli
-
-Najpierw osiem zakończonych modeli, w tym CE40. Po każdym z siedmiu nowych
-treningów automatycznie ten sam audyt. Dane: wyłącznie zapisany L i te same
+Audyt objął osiem wcześniejszych modeli, w tym CE40, oraz siedem modeli tej serii.
+Dane: wyłącznie zapisany L i te same
 1000 obrazów walidacji; bez testu i bez ujawniania etykiet U.
 
 - PCA oraz t-SNE (seed=0, te same ustawienia), PNG i SVG.
@@ -29,20 +25,6 @@ Wyniki: `outputs/representations/<nazwa_run>/`, zestawienie `comparison.csv`
 i `comparison.json`. Hash wag i podziału chroni przed ponownym użyciem
 analizy innego modelu. t-SNE jest ilustracją; klastry na rysunku nie zastępują
 pomiarów w pełnej przestrzeni. Osie niezależnych t-SNE nie są wspólnym układem.
-
-Biblioteki wykresów są w lokalnym `.venv-analysis`, współdzielącym istniejący
-PyTorch. Globalne pakiety Pythona nie zostały zmienione. Instalacja:
-
-```powershell
-python -m venv --system-site-packages .venv-analysis
-.\.venv-analysis\Scripts\python.exe -m pip install matplotlib scikit-learn
-```
-
-Dowolny późniejszy model zgodny z formatem runów można zbadać poleceniem:
-
-```powershell
-.\.venv-analysis\Scripts\python.exe scripts/analyze_representations.py outputs/pilot/NAZWA_RUN --output-dir outputs/representations
-```
 
 ## Lepszy dobór trójek
 
@@ -114,29 +96,14 @@ zapytaniu. Wynik walidacji w rundzie pozyskania dotyczy modelu sprzed treningu
 na nowych etykietach. Zapisujemy indeksy zapytań, ujawnione klasy, końcowy
 histogram klas, L/U views, forwardy selekcji i checkpoint całego stanu.
 
-## Uruchomienie, wznowienie i koszty
+## Artefakty
 
-```powershell
-python scripts/run_next_pilot.py
-```
+Lokalne wyniki: `outputs/pilot_next/results.json`; audyty:
+`outputs/representations/`. Wersjonowana migawka jest w `results/`.
 
-Polecenie czeka na CE40, potem wykonuje audyty i siedem nowych treningów.
-Ponowne uruchomienie wznawia checkpointy i pomija ukończone zgodne runy oraz
-analizy. Blokada procesu zapobiega równoległym kopiom tej kolejki i jest
-zwalniana przez system również po restarcie komputera. Sam restart nie
-uruchamia kolejki automatycznie. Stan: `outputs/pilot_next/queue.json`.
-Końcowe wyniki: `outputs/pilot_next/results.json`.
-
-Każdy nowy trening ma 20 epok i seed=0. Na podstawie dotychczasowych czasów:
-około 35–45 minut na trójki L oraz około 75–95 minut na każdy z sześciu
-wariantów korzystających z U, plus analizy. Cała seria orientacyjnie 8–11
-godzin po CE40. Nowe mechanizmy mogą zmienić te czasy.
-
-1000 dodatkowych etykiet walidacyjnych jest wspólnym zasobem; nie liczymy
-ich jako treningowych ani nie dopuszczamy do U. Oficjalny test oceniamy po
-ostatniej epoce każdego z góry określonego runu. Nie dobieramy na nim wag,
-progów ani harmonogramów. Jest to seria eksploracyjna; kolejne seedy będą
-potrzebne przed wnioskowaniem o małych różnicach.
+1000 etykiet walidacyjnych jest osobnym zasobem, wyłączonym z L i U.
+Oficjalny test oceniano po ostatniej epoce każdego runu; nie dobierano na nim
+wag, progów ani harmonogramów. To seria eksploracyjna jednego seedu.
 
 Źródła: [FaceNet](https://arxiv.org/abs/1503.03832),
 [SoftMatch](https://arxiv.org/abs/2301.10921),

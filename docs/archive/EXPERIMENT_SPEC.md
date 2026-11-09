@@ -1,4 +1,5 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Historyczna specyfikacja rekonstrukcji manuskryptu. Siatka 5760 konfiguracji
+> nie została wykonana i nie jest bieżącym planem badań.
 
 # Experiment Spec Reconstructed From `access_v4.pdf`
 

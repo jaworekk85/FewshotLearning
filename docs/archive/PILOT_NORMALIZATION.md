@@ -1,8 +1,9 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Porównanie BatchNorm i braku normalizacji
 
-Zlecone 16.10.2026. Plan: `configs/cifar10_pilot_normalization.json`.
+Ukończona ablacja. Konfiguracja: `configs/cifar10_pilot_normalization.json`.
 Zakres to mała ablacja CE i CE+pseudoetykiety z BatchNorm i bez normalizacji.
 GroupNorm usunięto z kolejki na prośbę użytkownika przed rozpoczęciem treningów.
 Nie rozszerzamy wszystkich kombinacji trójek, AE i AL na pełną siatkę.
@@ -10,10 +11,10 @@ Nie rozszerzamy wszystkich kombinacji trójek, AE i AL na pełną siatkę.
 | Normalizacja | CE | CE + pseudoetykiety |
 | --- | --- | --- |
 | BatchNorm | istniejący wynik 49.25% test | istniejący wynik 58.25% test |
-| Brak normalizacji | nowy trening | nowy trening |
+| Brak normalizacji | ukończony trening | ukończony trening |
 
 Nie powtarzamy dwóch ukończonych wyników z BatchNorm ani wspólnej kontroli
-CE+forward U już zaplanowanej w poprzednim bloku.
+CE+forward U wykonanej w bloku rekonstrukcji.
 
 ## Wspólne warunki
 
@@ -41,22 +42,8 @@ rzeczywiste liczniki. Usunięcie BatchNorm nie oznacza sztucznego dodania U do C
 Przy stałym optymalizatorze oceniamy wpływ zamiany normalizacji w obecnej
 recepturze. To nie dowód, że któryś wariant jest najlepszy po osobnym strojeniu.
 
-## Kolejka i raporty
+## Wyniki
 
-Proces czeka na `outputs/pilot_reconstruction/results.json` z pięcioma
-ukończonymi runami. Potem wykonuje dwa brakujące treningi sekwencyjnie,
-z audytem reprezentacji po każdym. Wspólna tabela wszystkich rodzin:
-`outputs/pilot_comparison.md`, `.csv`, `.json`, z kolumną normalizacji.
-
-```powershell
-python -u scripts/run_next_pilot.py --plan configs/cifar10_pilot_normalization.json --device cpu
-```
-
-Stan i aktualne logi: `outputs/pilot_normalization/queue.json`, `queue_no_groupnorm.stdout.log`,
-`queue_no_groupnorm.stderr.log`. Wznowienie tą samą komendą pomija zgodne ukończone runy
-i odtwarza checkpointy. Oczekiwanie na wcześniejszą serię ma limit 48 godzin.
-Po restarcie komputera proces trzeba uruchomić ponownie.
-
-Na podstawie czasów dotychczasowego CNN dodatkowe dwa treningi powinny
-zająć około 1,5–2,5 godziny po bloku AE/VAE. To szacunek: brak normalizacji może zmienić
-wydajność CPU. Model w każdym wariancie zaczyna od początku, a nie od wag BN.
+Wykonano dwa treningi bez normalizacji; wyniki i konfiguracje są w
+`results/runs/pilot_normalization/`. Wspólna tabela wszystkich rodzin:
+`results/cifar10/comparison.csv` i `.json`, z kolumną normalizacji.

@@ -33,7 +33,10 @@ To krótki test na syntetycznych obrazach, **nie wynik badawczy**. Nie nadpisuje
 zakończonych treningów. Ponowne wykonanie wymaga nowej nazwy lub usunięcia
 wyłącznie własnego katalogu testowego.
 
-## Pierwsza rzeczywista seria: Fashion-MNIST
+## Odtworzenie ukończonej serii Fashion-MNIST
+
+Seria jest już wykonana; poniższe polecenia służą odtworzeniu wyników
+we własnym środowisku.
 
 ```powershell
 python scripts/download_data.py fashion_mnist
@@ -42,7 +45,7 @@ python scripts/run_gray_ssl.py --benchmark
 python scripts/run_gray_ssl.py --device cpu
 ```
 
-Plan: pięć metod × trzy budżety i pełny nadzór, łącznie 16 treningów.
+Ukończona seria: pięć metod × trzy budżety i pełny nadzór, łącznie 16 treningów.
 Zmierzony czas dotychczasowej serii wynosił około 1,4 godziny samych treningów
 na lokalnym CPU; wynik zależy od sprzętu. `--max-jobs 1` ogranicza liczbę nowych
 treningów przy pierwszym uruchomieniu. Ta sama komenda wznowi przerwaną kolejkę.

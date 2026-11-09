@@ -1,12 +1,11 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Jakość zbioru wybranego przez AL przy etykietach dostępnych od początku
 
-Zlecone 18.10.2026. **Dwa nowe treningi**. Cel: oddzielić jakość końcowego
-zbioru 500 oznaczonych obrazów od historii stopniowego dostępu do etykiet.
-Uruchomiono **18.10.2026 o 23:07 czasu polskiego**, lokalnie na CPU,
-worker **PID 31320**. Logi: `outputs/pilot_active_subset_control/queue_20261018.stdout.log`
-i `queue_20261018.stderr.log`. Przed startem przeszły wszystkie **71 testów**.
+Ukończono dwa treningi porównujące jakość końcowego zbioru 500 oznaczonych
+obrazów przy dostępie do wszystkich etykiet od początku. Konfiguracja:
+`configs/cifar10_pilot_active_subset_control.json`.
 
 ## Dokładne źródła danych
 
@@ -66,9 +65,8 @@ przez niepełne minibatch'e przy zmieniającej się liczbie L — i tylko pięć
 epok z pełnym budżetem. Nie przypisujemy poprawy jednej z tych przyczyn.
 Nie nazywamy tego izolowanym pomiarem samego opóźnienia etykietowania.
 
-Jeśli zbiór BADGE wygra po treningu od początku, będzie to wskazówka, że
-wcześniejszy protokół online mógł ograniczać jego użyteczność. Jeśli nie,
-sam moment ujawnienia etykiet nie wyjaśni gorszego wyboru w tym porównaniu.
+Porównanie sprawdza, czy różnica między końcowymi zbiorami BADGE i random
+utrzymuje się po treningu od początku.
 To dwa konkretne zbiory i seed 0; nie dowodzi przewagi strategii w ogólności.
 Początkowe 300 było wspólne, aktywnie wybierano tylko 200 z końcowych 500.
 
@@ -78,33 +76,16 @@ bez dodatkowej zmiany długości harmonogramu. Koszt pierwotnej selekcji AL
 już poniesiono; nowe treningi mierzą jakość jej końcowego zbioru, nie pełny
 koszt całej procedury wyboru i ponownego uczenia.
 
-## Uruchomienie i artefakty
+## Artefakty
 
-```powershell
-python scripts/prepare_active_subset_control.py
-python scripts/run_next_pilot.py --plan configs/cifar10_pilot_active_subset_control.json --print-plan
-python scripts/run_next_pilot.py --plan configs/cifar10_pilot_active_subset_control.json --start-prepared --device cpu
-```
-
-Pierwsze polecenie tylko przygotowuje migawki i plan; jest idempotentne,
-odmawia nadpisania plików o innej treści. Samo nie trenuje. Plan pozostaje
-manual-start-only, z blokadą pojedynczego workera i wznowieniem na granicach
-epok. Przed wznowieniem sprawdzić PID w `queue.json`.
-
-Stan: `outputs/pilot_active_subset_control/queue.json`.
-Runy: `cnn_N500_seed0_soft_frozen_random` i `cnn_N500_seed0_soft_frozen_badge`.
-Automatyczny raport po każdym ukończonym runie:
-`outputs/pilot_active_subset_control_analysis/comparison.md` i `.json`.
-Weryfikuje niezmienność źródeł, dokładność indeksów, wspólną inicjalizację
-i identyczne liczniki nowych runów. Standardowy audyt reprezentacji również
-wykonuje się po każdym modelu. Wspólna tabela pilota obejmuje nowy katalog.
+Wersjonowane runy: `results/runs/pilot_active_subset_control/`:
+`cnn_N500_seed0_soft_frozen_random` i `cnn_N500_seed0_soft_frozen_badge`.
+Lokalny raport: `outputs/pilot_active_subset_control_analysis/comparison.md`
+i `.json`. Weryfikuje niezmienność źródeł, dokładność indeksów, wspólną
+inicjalizację i identyczne liczniki nowych runów.
 
 Odświeżenie raportu bez treningu:
 
 ```powershell
-.\.venv-analysis\Scripts\python.exe scripts/summarize_active_subset_control.py
+python scripts/summarize_active_subset_control.py
 ```
-
-Orientacyjny czas na lokalnym CPU: około **80–100 minut na run**, łącznie
-**2,5–3,5 godziny** z analizami, jeśli utrzyma się ostatnie tempo.
-Nie uruchamiamy chmury ani nowych płatnych zasobów.

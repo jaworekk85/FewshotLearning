@@ -1,28 +1,12 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Pilot SSL: wspólne batche, trójki i pseudoetykiety
 
-Kod przygotowany i sprawdzony testami; wyniki na CIFAR-10 dla nowych wariantów
-wymagają osobnych treningów. Dotychczasowe 29.77% i 49.62% pochodzą z CE
-z jednym widokiem, więc pozostają osobnymi punktami odniesienia.
-
-Rozpoczęto pierwszą parę N=50, seed=0: `ce_2v`, następnie `ce_2v_pseudo`.
-Stan kolejki: `outputs/pilot/queue_N50_seed0.json`.
-Po ukończeniu tej pary automatycznie ruszą `ce_2v_triplet_l`,
-`ce_2v_triplet_u` i `ce_2v_triplet_lu`, sekwencyjnie na tym samym CPU.
-Ich kolejka: `outputs/pilot/queue_N50_seed0_triplets.json`.
-Po nich zaplanowano porównanie `ce_2v_pseudo_random_triplet` oraz
-`ce_2v_pseudo_guided_triplet`. Kolejka:
-`outputs/pilot/queue_N50_seed0_pseudo_triplets.json`.
-To siedem wariantów dla jednego budżetu i jednego seeda; N=10 nie jest
-jeszcze objęte tą nową serią. `ce_2v_triplet_lu_pseudo` pozostaje dodatkowym
-wariantem dostępnym w kodzie, poza tą kolejką.
-Kontrola na rzeczywistych danych potwierdziła identyczny hash początkowych
-wag i identyczną ekspozycję L dla obu wariantów. Dziewiętnaście testów obejmuje
-maskowanie pseudoetykiet, odłączenie ich od gradientu, brak przecieku między
-pulami, wspólne widoki L, liczniki wejść encodera i deterministyczne wznowienie.
-Testy nowych trójek sprawdzają też wykorzystanie klas pseudoetykiet,
-odrzucanie niepewnych predykcji i brak pozytywu będącego tym samym obrazem.
+Seria CIFAR-10, N=50, seed=0 została ukończona. Wyniki CE z jednym widokiem
+(29,77% dla N=10 i 49,62% dla N=50) pozostają osobnymi odniesieniami;
+nie należą do poniższego protokołu dwóch widoków L.
+Konfiguracja: `configs/cifar10_pilot_ssl.json`.
 
 ## Warianty
 
@@ -134,8 +118,8 @@ jako treningowe przejścia ze wspólnym grafem i BatchNorm; walidacja i test
 nie są wliczane.
 
 Główne porównanie utrzymuje taką samą ekspozycję L i liczbę aktualizacji.
-U zwiększa koszt. Kontrola dłuższego CE, np. `--epochs 40`, może w przybliżeniu
-wyrównać liczbę widoków dla wariantu o dwóch batchach L i dwóch U. Rzeczywiste
+U zwiększa koszt. Wykonana kontrola CE40 w przybliżeniu
+wyrównuje liczbę widoków dla wariantu o dwóch batchach L i dwóch U. Rzeczywiste
 liczniki, czasy, rozmiary batchy i harmonogramy trzeba raportować; równa
 liczba widoków nie daje identycznych aktualizacji ani czasu/FLOPs.
 
@@ -144,37 +128,10 @@ prezentacji obrazów, nie liczba unikatowych dodatkowych anotacji.
 Zapisujemy udział akceptacji, średnią pewność i histogram przewidywanych klas.
 Nie mierzymy ich poprawności ukrytymi etykietami U podczas wyboru wariantu.
 
-## Uruchamianie
+## Odtwarzanie
 
-Podgląd:
-
-```powershell
-python scripts/run_supervised.py --config configs/cifar10_pilot_ssl.json --method ce_2v_pseudo --print-spec
-```
-
-Pierwsza sparowana para dla N=50, osobne losowe inicjalizacje o tym samym seed:
-
-```powershell
-python scripts/run_pilot_pair.py --budget 50 --seed 0 --device cpu
-```
-
-Kolejka działa sekwencyjnie, zapisuje stan po każdym runie i wznawia
-niedokończone checkpointy. Można też uruchamiać metody oddzielnie:
-
-```powershell
-python scripts/run_supervised.py --config configs/cifar10_pilot_ssl.json --method ce_2v --device cpu --run-name cnn_N50_seed0_ce_2v --output-dir outputs/pilot
-python scripts/run_supervised.py --config configs/cifar10_pilot_ssl.json --method ce_2v_pseudo --device cpu --run-name cnn_N50_seed0_ce_2v_pseudo --output-dir outputs/pilot
-```
-
-Pierwsze dwie epoki bez końcowego testu:
-
-```powershell
-python scripts/run_supervised.py --config configs/cifar10_pilot_ssl.json --method ce_2v_pseudo --device cpu --run-name pseudo_timing --stop-after-epoch 2
-```
-
-Wznowienie: ta sama komenda i konfiguracja z `--resume`, bez limitu zatrzymania.
-N=10: dodać `--budget 10` i nową nazwę runu. Krótki test syntetyczny: `--smoke`.
-Przed pełną serią uruchomić jedną parę; nie zakładać wzrostu accuracy.
+Uruchomienie pojedynczego wariantu opisuje [GETTING_STARTED.md](../GETTING_STARTED.md).
+Własne powtórzenie wymaga osobnej nazwy runu lub katalogu wyników.
 
 Źródła: [FixMatch](https://arxiv.org/abs/2001.07685),
 [implementacja autorów USB](https://github.com/microsoft/Semi-supervised-learning/blob/main/semilearn/algorithms/fixmatch/fixmatch.py).

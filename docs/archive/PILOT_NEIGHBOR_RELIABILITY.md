@@ -1,8 +1,10 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
 # Sąsiedztwo jako sygnał wiarygodności pseudoetykiet
 
-**Cztery nowe treningi; dwa istniejące wyniki kontrolne wykorzystujemy ponownie.**
+Ukończono cztery treningi; dwa istniejące wyniki kontrolne wykorzystano ponownie.
+Konfiguracja: `configs/cifar10_pilot_neighbor_reliability.json`.
 
 Cel: sprawdzić, czy niezgodność pewnych pseudoetykiet z oznaczonymi sąsiadami
 pomaga ustalać ich wagi lub wybierać nowe obrazy do oznaczenia.
@@ -107,33 +109,13 @@ Wspólny raport sprawdza inicjalizację, walidację, liczniki w każdej grupie i
 Oficjalny test jest oceniany dopiero dla końcowego checkpointu; wybór checkpointu = last.
 To pilot z jednym seedem, wybrany po analizie walidacji, bez twierdzeń potwierdzających statystycznie.
 
-## Start i wznowienie
+## Artefakty
 
-Podgląd, bez uczenia:
-
-```powershell
-python scripts/run_next_pilot.py --plan configs/cifar10_pilot_neighbor_reliability.json --print-plan
-```
-
-**Komenda na jutro** (z katalogu repo):
-
-```powershell
-python -u scripts/run_next_pilot.py --plan configs/cifar10_pilot_neighbor_reliability.json --start-prepared
-```
-
-Ta sama komenda wznawia przerwany run od końca ostatniej zapisanej epoki i pomija
-zgodne ukończone runy. Nie należy uruchamiać drugiej kopii kolejki równolegle.
-Bez `--start-prepared` plan odmawia startu przed utworzeniem katalogu treningowego.
-
-Stan: `outputs/pilot_neighbor_reliability/queue.json`.
-Wyniki i kontrole: `outputs/pilot_neighbor_reliability_analysis/comparison.md`.
-Reprezentacje są automatycznie analizowane po każdym modelu.
-Raport można odświeżyć bez uczenia:
+Wersjonowane runy: `results/runs/pilot_neighbor_reliability/`.
+Lokalny raport: `outputs/pilot_neighbor_reliability_analysis/comparison.md`.
+Reprezentacje przeanalizowano po każdym modelu.
+Odświeżenie raportu bez treningu:
 
 ```powershell
 python scripts/summarize_neighbor_reliability.py
 ```
-
-Szacunek na dotychczasowym CPU: orientacyjnie **6–8 godzin za cztery nowe runy**;
-dodatkowy forward eval wymaga potwierdzenia tempa po pierwszych epokach.
-To nie jest zlecenie ani harmonogram automatycznego uruchomienia.

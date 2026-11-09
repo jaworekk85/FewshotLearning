@@ -35,8 +35,9 @@ python scripts/download_data.py fashion_mnist
 python scripts/run_gray_ssl.py --print-plan
 ```
 
-Po sprawdzeniu planu `python scripts/run_gray_ssl.py --device cpu` uruchamia
-lub wznawia serię 16 treningów. Pobrane dane i nowe wyniki zostają lokalnie.
+Seria 16 treningów Fashion-MNIST jest ukończona, a wyniki są w repo.
+Powyższy podgląd pokazuje jej konfigurację. Odtworzenie we własnym środowisku:
+`python scripts/run_gray_ssl.py --device cpu`. Dane i nowe wyniki zostają lokalnie.
 Pełny protokół: [Fashion-MNIST](docs/FASHION_MNIST_SSL.md).
 
 ## Organizacja
@@ -49,7 +50,7 @@ Pełny protokół: [Fashion-MNIST](docs/FASHION_MNIST_SSL.md).
 | `tests/` | Testy na małych fixture’ach, bez pobierania zbiorów |
 | `results/` | Mała, wersjonowana migawka rzeczywistych wyników i wykresów |
 | `reports/` | Gotowy raport dla doktoranta |
-| `docs/` | Instrukcje i interpretacja; `docs/archive/` to historyczne notatki |
+| `docs/` | Instrukcje i interpretacja; [archiwum](docs/archive/README.md) opisuje wykonane protokoły |
 
 `data/`, `outputs/`, środowiska Pythona i checkpointy nie trafiają do Gita.
 Pełne lokalne artefakty pozostały zachowane. Klon zawiera wyniki do analizy,
@@ -60,9 +61,14 @@ trening od początku. Nie ma konieczności używania Git LFS do tej migawki.
 
 Nazwa repo pochodzi od wcześniejszego kierunku badań. Obecne piloty to **SSL
 przy małym budżecie etykiet**, nie test adaptacji do nowych klas. Starszy
-protokół `v4_protocol.json` rekonstruuje opis manuskryptu; jego 5760 pozycji to
-plan, nie wykonane eksperymenty. Oryginalne wyniki doktoranta nie były dostępne.
+protokół `v4_protocol.json` rekonstruuje opis manuskryptu. Siatka 5760 konfiguracji
+nie została wykonana i nie jest kolejką do uruchomienia.
+Oryginalne wyniki doktoranta nie były dostępne.
 Manuskrypt `access_v4.pdf` pozostaje plikiem lokalnym, poza publicznym repo.
+
+Repo nie zawiera obecnie zatwierdzonej listy kolejnych eksperymentów.
+Konfiguracje ukończonych serii służą odtwarzaniu wyników; nie oznaczają zlecenia
+ponownego treningu ani rozszerzania siatki.
 
 Nie publikujemy tu deklaracji nowej metody ani istotności niewielkich różnic
 z pojedynczego seedu. [Wyniki i ograniczenia](docs/RESULTS.md).

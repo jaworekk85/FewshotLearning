@@ -1,24 +1,17 @@
-> Historical lab note. Status/ETA below may be outdated; see [current results](../RESULTS.md).
+> Dokumentacja ukończonego eksperymentu; wyniki: [RESULTS.md](../RESULTS.md).
+> Opis służy interpretacji i odtworzeniu wyników, nie jest listą zadań.
 
-# Kolejne strategie active learning — ukończony pilot
+# Strategie active learning — ukończony pilot
 
-Seria ukończona 17.10.2026 bez błędów; wyniki w
-`outputs/pilot_active_prepared/results.json`. Kolejny uruchomiony etap opisuje
-`PILOT_VALIDATION_STUDY.md`.
-
-Przygotowano 17.10.2026 bez uruchamiania. Następnie, na polecenie użytkownika,
-**uruchomiono pięć strategii 17.10.2026 o 13:48 czasu polskiego**, lokalnie na
-CPU, po ukończeniu AE/VAE i normalizacji. Worker PID 28696. Plan:
-`configs/cifar10_pilot_active_prepared.json`, `manual_start_only: true`;
-uruchomiony jawnie z `--start-prepared`. Stan i postęp są w
-`outputs/pilot_active_prepared/queue.json`, logi w `queue_20261017.stdout.log`
-i `queue_20261017.stderr.log` w tym samym katalogu. Przy restarcie najpierw
-sprawdzić stan procesu; nie uruchamiać drugiego workera równolegle.
+Ukończono pięć strategii 17.10.2026. Konfiguracja:
+`configs/cifar10_pilot_active_prepared.json`. Lokalne wyniki:
+`outputs/pilot_active_prepared/results.json`; wersjonowana migawka:
+`results/runs/pilot_active_prepared/`.
 
 ## Pytanie badawcze i dotychczasowy punkt odniesienia
 
 Jak wybierać prawdziwe etykiety uzupełniające pseudoetykietowanie, zamiast
-wybierać wyłącznie obrazy o największej entropii? Hipoteza do sprawdzenia:
+wybierać wyłącznie obrazy o największej entropii? Badana hipoteza:
 etykieta poprawiająca błędną, również pewną, pseudoetykietę w gęstym regionie
 reprezentacji może być użyteczniejsza od etykiety izolowanego trudnego obrazu.
 Nowość względem literatury nie została potwierdzona.
@@ -39,7 +32,7 @@ zbalansowana niż entropia. Inne hipotezy: niereprezentatywne izolowane punkty,
 słaba geometria embeddingu, zły pomiar niepewności, zbyt krótki czas treningu
 na późno pozyskanych etykietach. Jeden seed nie rozstrzyga mechanizmu.
 
-## Pięć gotowych wariantów
+## Pięć wykonanych wariantów
 
 Wzory używają predykcji klasyfikatora `p(x)`, surowego embeddingu `z(x)` oraz
 jego wersji unormowanej `u(x)`. `H` to entropia, `JS` to dywergencja
@@ -104,18 +97,12 @@ na podstawie testu ani nie gwarantujemy, że któryś wariant wygra.
   obliczeniowego. L/U exposure jest zgodne pomiędzy strategiami AL przy
   wspólnym harmonogramie; stałe 500 etykiet od początku to osobne odniesienie.
 
-Dotychczasowe AL trwały 77–80 min dla dwóch pierwszych strategii i 134 min
-dla ostatniej przy wolniejszej pracy laptopa. Dla pięciu nowych runów można
-wstępnie rezerwować **7–13 godzin CPU plus audyty**, z dużą niepewnością.
-To nie zmierzone ETA tej serii; przed startem uwzględnić aktualne obciążenie.
-
 ## Artefakty i analiza przyczyn
 
 Wyniki: `outputs/pilot_active_prepared/`, pełne checkpointy
 i wznowienie na granicach epok, `history.csv`, `acquisitions.json`, końcowe
 `metrics.json`, standardowy audyt reprezentacji po każdym modelu.
-Wspólna tabela `outputs/pilot_comparison.md/.csv/.json` uwzględni nowy katalog
-dopiero po pojawieniu się prawdziwych runów. Konfiguracje nie są wynikami.
+Wspólna tabela wykonanych treningów: `results/cifar10/comparison.csv` i `.json`.
 
 Każda runda zapisuje indeksy i hash kandydatów, ujawnione po wyborze etykiety,
 wyniki wybranych punktów: entropię, pewność, klasę przewidywaną, dostępne
@@ -123,38 +110,8 @@ składniki gęstości/JS/normy gradientu i pochodzenie ranked/random.
 Etykiety zapytań wolno wykorzystać dopiero po wyborze do analizy błędów,
 nie do cofania ani zmiany selekcji. Etykiet reszty U selektor nie otrzymuje.
 
-Po uzyskaniu wyników zbadać krzywe walidacji, klasy zapytań, udział błędnych
-predykcji w kupionych etykietach, redundancję/gęstość wybranych obrazów oraz
-rzeczywisty koszt. W kolejnych eksperymentach warto dopisać pomiary jakości
-pseudoetykiet i reprezentacji w każdej rundzie; obecnie standardowy audyt
-reprezentacji jest końcowy. Oryginalne rundy nie mają zachowanych wszystkich
-ówczesnych predykcji, więc nie odtwarzamy ich z końcowego modelu.
-
-## Bezpieczny podgląd i późniejszy start
-
-Podgląd waliduje pięć konfiguracji. Nie trenuje i nie tworzy workera:
-
-```powershell
-python scripts/run_next_pilot.py --plan configs/cifar10_pilot_active_prepared.json --print-plan
-```
-
-Użyte polecenie startu; służy również do wznowienia po zakończeniu procesu:
-
-```powershell
-python scripts/run_next_pilot.py --plan configs/cifar10_pilot_active_prepared.json --start-prepared --device cpu
-```
-
-Polecenie startu poczeka na ukończenie obecnej kolejki normalizacji
-(`outputs/pilot_normalization/results.json`). Bez `--start-prepared` plan
-odmawia uruchomienia przed utworzeniem katalogu wyników. Nie jest to usługa
-działająca w tle. Aby wznowić po restarcie, użyć tego samego jawnego polecenia.
-GPU można wybrać przez `--device cuda`, dopiero w środowisku z PyTorch CUDA.
-
-Nie zmieniamy teraz harmonogramu, bazowej straty ani liczby epok. Osobne,
-przyszłe badania: dodatkowy czas po ostatniej akwizycji (dla wszystkich
-strategii wraz z random), aktywna selekcja przy miękkich pseudoetykietach,
-reprezentacja AE/VAE, wiele seedów i budżetów. Te pomysły nie należą do
-obecnego pięciorunowego planu i nie mają uruchomionych workerów.
+Standardowy audyt reprezentacji jest końcowy. Oryginalne rundy nie mają
+zachowanych wszystkich ówczesnych predykcji; końcowy model ich nie odtwarza.
 
 Źródła:
 [BADGE](https://arxiv.org/abs/1906.03671),
